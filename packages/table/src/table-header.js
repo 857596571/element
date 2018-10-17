@@ -385,7 +385,6 @@ export default {
         const handleMouseMove = (event) => {
           const deltaLeft = event.clientX - this.dragState.startMouseLeft;
           const proxyLeft = this.dragState.startLeft + deltaLeft;
-
           resizeProxy.style.left = Math.max(minLeft, proxyLeft) + 'px';
         };
 
