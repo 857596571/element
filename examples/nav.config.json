@@ -245,6 +245,23 @@
               "title": "Collapse 折叠面板"
             }
           ]
+        },
+        {
+          "groupName": "业务组件",
+          "list": [
+            {
+              "path": "/attachment-manage",
+              "title": "AttachmentManage 附件上传"
+            },
+            {
+              "path": "/flow-record",
+              "title": "FlowRecord 流转记录"
+            },
+            {
+              "path": "/quality-control-chart",
+              "title": "qualityControlChart 质控图"
+            }
+          ]
         }
       ]
     }
