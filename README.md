@@ -50,7 +50,7 @@ import Element from 'element-ui-qz-qz'
 
 Vue.use(Element)
 
-// or
+// or或者
 import {
   Select,
   Button
