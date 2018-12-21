@@ -73,6 +73,27 @@
   @include e(nav-next) {
     right: 0;
   }
+  @include e(panel) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 26px;
+    min-width: 100px;
+    max-width: 150px;
+    li {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: #666;
+      font-size: 14px;
+      cursor: pointer;
+      &:hover,
+      &.active {
+        color: #409eff;
+      }
+    }
+  }
   @include e(nav-prev) {
     left: 0;
   }
