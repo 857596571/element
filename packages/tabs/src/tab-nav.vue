@@ -158,7 +158,6 @@
       },
       removeFocus() {
         this.isFocus = false;
-        this.isPanel = false;
       },
       visibilityChangeHandler() {
         const visibility = document.visibilityState;
@@ -226,7 +225,7 @@
                       <li
                         class={pane.active ? 'active' : ''}
                         title={tabLabelContent}
-                        on-click={(ev) => { removeFocus(); onTabClick(pane, tabName, ev); }}
+                        on-click={(ev) => { removeFocus(); onTabClick(pane, tabName, ev); this.isPanel = false; }}
                       >{tabLabelContent}</li>
                     );
                   })
