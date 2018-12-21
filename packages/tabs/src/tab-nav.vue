@@ -37,7 +37,8 @@
         scrollable: false,
         navOffset: 0,
         isFocus: false,
-        focusable: true
+        focusable: true,
+        isPanel: false
       };
     },
 
@@ -157,6 +158,7 @@
       },
       removeFocus() {
         this.isFocus = false;
+        this.isPanel = false;
       },
       visibilityChangeHandler() {
         const visibility = document.visibilityState;
@@ -192,16 +194,47 @@
         onTabRemove,
         navStyle,
         scrollable,
-        scrollNext,
+        // scrollNext,
         scrollPrev,
         changeTab,
         setFocus,
         removeFocus
       } = this;
-      const scrollBtn = scrollable
+      /* const scrollBtn = scrollable
         ? [
           <span class={['el-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="el-icon-arrow-left"></i></span>,
           <span class={['el-tabs__nav-next', scrollable.next ? '' : 'is-disabled']} on-click={scrollNext}><i class="el-icon-arrow-right"></i></span>
+        ] : null; */
+      const scrollBtn = scrollable
+        ? [
+          <span class={['el-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="el-icon-arrow-left"></i></span>,
+          <span
+            class={['el-tabs__nav-next', scrollable.next ? '' : 'is-disabled']}
+            on-mouseover={() => { this.isPanel = true; }}
+          >
+            <el-popover
+              placement="bottom-start"
+              trigger="hover"
+              value={this.isPanel}
+            >
+              <ul class="el-tabs__panel">
+                {
+                  this._l(panes, (pane, index) => {
+                    let tabName = pane.name || pane.index || index;
+                    let tabLabelContent = pane.$slots.label || pane.label;
+                    return (
+                      <li
+                        class={pane.active ? 'active' : ''}
+                        title={tabLabelContent}
+                        on-click={(ev) => { removeFocus(); onTabClick(pane, tabName, ev); }}
+                      >{tabLabelContent}</li>
+                    );
+                  })
+                }
+              </ul>
+              <i class="el-icon-arrow-right" slot="reference"></i>
+            </el-popover>
+          </span>
         ] : null;
 
       const tabs = this._l(panes, (pane, index) => {
