@@ -220,7 +220,7 @@
                 {
                   this._l(panes, (pane, index) => {
                     let tabName = pane.name || pane.index || index;
-                    let tabLabelContent = pane.$slots.label || pane.label;
+                    let tabLabelContent = pane.label;
                     return (
                       <li
                         class={pane.active ? 'active' : ''}
