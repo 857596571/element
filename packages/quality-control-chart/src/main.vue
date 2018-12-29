@@ -264,8 +264,8 @@
                   opacity: '0.7'
                 }
               },
-              max: lineData.statistic_end_value,
-              min: lineData.statistic_begin_value,
+              max: Number(lineData.statistic_end_value),
+              min: Number(lineData.statistic_begin_value),
               axisLabel: {
                 show: false
               },
@@ -293,6 +293,20 @@
               bottom: -14,
               start: 0,
               end: seriesData.length > 16 ? (16 / seriesData.length * 100) - 1 : 100
+            },
+            {
+              type: 'slider',
+              show: false,
+              yAxisIndex: [0],
+              left: 0,
+              start: 0,
+              end: 100
+            },
+            {
+              type: 'inside',
+              yAxisIndex: [0],
+              start: 0,
+              end: 100
             }
           ],
           series: [
