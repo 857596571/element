@@ -104,14 +104,15 @@
                     show-overflow-tooltip
                     :formatter="formatterEncryLevel">
             </el-table-column>-->
-            <el-table-column
-                    prop="source"
-                    label="来源"
-                    show-overflow-tooltip>
-            </el-table-column>
+
             <el-table-column
                     prop="upload_tm"
                     label="修改时间"
+                    show-overflow-tooltip>
+            </el-table-column>
+            <el-table-column
+                    prop="remark"
+                    label="备注"
                     show-overflow-tooltip>
             </el-table-column>
             <el-table-column
@@ -560,6 +561,8 @@
           prn === undefined ||
           JID === '' ||
           JID === undefined) {
+
+          this.files_list = this.files_list_full = [];
           return;
         }
 

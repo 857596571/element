@@ -15,7 +15,9 @@
 
                 </div>
                 <!--<button id="btn-take-picture" @click="takePicture" style="display:block;">拍照</button>-->
-                <a class="tab" @click="take_picture_handle"><img src="../images/cut-pic.png"/>拍照</a>
+                <a class="tab" @click="take_picture_handle" :style="$parent.navigatorStream && $parent.navigatorStream.active ? '' : 'background: #e8e8e8'"><img src="../images/cut-pic.png" />拍照</a>
+                <a class="tab" @click="picturesOpen" style="margin-left: 10px;" :style="$parent.navigatorStream && $parent.navigatorStream.active && images_data.length > 0 ? '' : 'background: #e8e8e8'">下一步</a>
+
             </div>
             <i class="icon-scala" v-if="picturesBox == 'open'" @click="picturesClose">
                 <svg viewBox="64 64 896 896" class="" data-icon="menu-fold" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"></path></svg>
@@ -23,19 +25,23 @@
             <i class="icon-scala" v-if="picturesBox != 'open'" @click="picturesOpen">
                 <svg viewBox="64 64 896 896" class="" data-icon="menu-unfold" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM142.4 642.1L298.7 519a8.84 8.84 0 0 0 0-13.9L142.4 381.9c-5.8-4.6-14.4-.5-14.4 6.9v246.3a8.9 8.9 0 0 0 14.4 7z"></path></svg>
             </i>
+            <div style="width: 90px;position: absolute;top: 0;right: 17px;height:360px; overflow-y: scroll;">
+                <div v-for="(item, index) in images_data" style="width: 80px;height:50px">
+                    <img v-bind:src="item" width="80" @dblclick="preview = item;isPreview = true"/>
+                    <i class="el-icon-error" @click="() => {delPicture(index)}" style="position: relative;top: -45px;left: 60px;"></i>
+                </div>
+            </div>
             <div id="pictures-box" class="pictures-box"
                  v-if="picturesBox == 'open'">
 
 
+                <el-dialog class="pictures-box-dialog" :append-to-body="true" :visible.sync="progressDialog" width="130px" :close-on-click-modal="false" :close-on-press-escape="false" :show-close="false">
+                    <el-progress type="circle" :percentage="~~(percentageValue / images_data.length * 50)"></el-progress>
+                </el-dialog>
                 <!--<canvas  id="canvas" width="122" height="122"></canvas>-->
                 <div class="context">
                     <div v-for="(item, index) in images_data" class="picture">
                         <img v-bind:src="item" width="160" @dblclick="preview = item;isPreview = true"/>
-                        <div class="link_button_box">
-                            <a href="javascript:void(0)" @click="open_modify_dialog">修改</a>
-                            <a href="javascript:void(0)">保存</a>
-                        </div>
-
                         <i class="el-icon-error" @click="() => {delPicture(index)}"></i>
                     </div>
                 </div>
@@ -48,17 +54,18 @@
                                 :value="item.value">
                         </el-option>
                     </el-select>
-                    <div class="btn"  @click="save">保存</div>
+                    <div class="btn"  @click="upload">保存</div>
                 </div>
             </div>
             <div class="clear"></div>
         </div>
         <el-dialog
                 :visible.sync="isPreview"
+                :append-to-body="true"
                 :before-close="() => {isPreview = false}"
                 title="预览"
-                width="670px">
-            <img v-bind:src="preview" width="630"/>
+                width="640px">
+            <img v-bind:src="preview" style="width: 100%"/>
         </el-dialog>
         <el-dialog
                 title="修改图片"
@@ -125,6 +132,7 @@
   import ElDialog from 'element-ui-qz/packages/dialog';
   import ElForm from 'element-ui-qz/packages/form';
   import ElFormItem from 'element-ui-qz/packages/form-item';
+  import ElProgress from 'element-ui-qz/packages/progress';
 
   export default {
     name: 'capture',
@@ -132,7 +140,8 @@
       ElButton,
       ElDialog,
       ElForm,
-      ElFormItem
+      ElFormItem,
+      ElProgress
     },
     computed: {
       type_options() {
@@ -165,13 +174,18 @@
           upload_category: 'KHWJ',
           upload_remark: ''
         },
-        picturesBox: 'open',
+        picturesBox: 'close',
         preview: undefined,
-        isPreview: false
+        isPreview: false,
+        percentageValue: 0,
+        progressDialog: false
       };
     },
     methods: {
       take_picture_handle: function() {
+        if (!this.$parent.navigatorStream || !this.$parent.navigatorStream.active) {
+          return;
+        }
         let canvas_node = document.createElement('canvas');
         let video = this.$refs.video;
         canvas_node.width = 640;
@@ -198,6 +212,9 @@
         this.picturesBox = 'close';
       },
       picturesOpen: function() {
+        if (!this.$parent.navigatorStream || !this.$parent.navigatorStream.active || this.images_data.length === 0) {
+          return;
+        }
         this.picturesBox = 'open';
       },
       savePicture: function() {
@@ -222,6 +239,65 @@
         }, function(response) {
 
         });
+      },
+      upload: function() {
+        if (!this.images_data || this.images_data.length === 0) {
+          this.$message.warning('请先拍摄！');
+          return;
+        }
+        let url = this.$parent.pre_interface_url + 'dataUpload';
+        let upload_submit_url = this.$parent.pre_interface_url + 'add';
+        let self = this;
+        this.progressDialog = true;
+        // 保存
+        const saveImg = (data) => {
+          this.$http.post(upload_submit_url, Object.assign({
+            file_name: data.obj.obj.name,
+            busin_co: this.$parent.upload_business_no,
+            bus_type: this.form.upload_category,
+            encr_lev: this.$parent.upload_encrypt_value,
+            remark: '拍摄',
+            file_prn: data.obj.obj.prn,
+            file_size: data.obj.obj.file_size,
+            file_uri: data.obj.obj.file_uri,
+            prn: this.$parent.data.prn,
+            source: '拍摄',
+            JID: this.$parent.data.JID
+          }, this.data), {
+            emulateJSON: true
+          }).then(response => {
+            self.percentageValue++;
+            if (self.images_data.length === this.percentageValue / 2) {
+              // self.$message.success('上传完成');
+              self.progressDialog = false;
+              self.cancel();
+              self.$parent.refresh_files_data && self.$parent.refresh_files_data();
+            }
+          });
+        };
+        // 上传
+        this.images_data.forEach((item, index) => {
+          this.$http.post(url, Object.assign({
+            bus_type: this.form.upload_category,
+            data: item
+          }, this.$parent.data), {
+            emulateJSON: true
+          }).then((response) => {
+            if (response.status === 200 && response.body.status) {
+              saveImg(response.body);
+              self.percentageValue++;
+            } else {
+              self.$message.error(`第${index + 1}张上传失败`);
+              self.percentageValue = this.percentageValue + 2;
+              if (this.images_data.length === this.percentageValue / 2) {
+                // self.$message.success('上传完成');
+                self.progressDialog = false;
+                self.cancel();
+                self.$parent.refresh_files_data();
+              }
+            }
+          });
+        });
       }
     },
     props: {},
@@ -231,6 +307,9 @@
           this.picturesBox = 'close';
         }
       }
+    },
+    beforeDestroy: function() {
+      this.cancel();
     }
 
   };

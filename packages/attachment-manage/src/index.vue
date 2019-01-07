@@ -421,6 +421,7 @@
         this.$confirm('确认关闭？')
           .then(_ => {
             done();
+            this.loadingSubmit = false;
           })
           .catch(_ => {
           });
@@ -607,6 +608,7 @@
         this.upload_category = 'KHWJ';
         this.upload_remark = '';
         this.fileList = [];
+        this.loadingSubmit = false;
       },
       get_interface_url: function() {
         let upload_url = this.data.uploadUrl;
