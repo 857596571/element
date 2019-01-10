@@ -249,6 +249,13 @@
      * @param {Function} callback
      */
     Popper.prototype.onCreate = function(callback) {
+        // multiple
+        var popper = document.querySelectorAll('.el-popper');
+        popper && popper.forEach(el => {
+          if (el.getAttribute('x-placement')) {
+            el.style.display = 'none';
+          }
+        });
         // the createCallbacks return as first argument the popper instance
         callback(this);
         return this;
@@ -461,7 +468,20 @@
             if (target === root.document.body || target === root.document.documentElement) {
                 target = root;
             }
-            target.addEventListener('scroll', this.state.updateBound);
+            // target.addEventListener('scroll', this.state.updateBound);
+            var self = this;
+            target.addEventListener('scroll', function() {
+              // self.state.updateBound && self.state.updateBound();
+              var { _reference, _popper, _options } = self;
+              _reference.classList.remove('is-focus');
+              var _input = _reference.getElementsByTagName('input')[0];
+              var _icon = _reference.getElementsByClassName('el-input__icon')[0];
+              _input && _input.blur();
+              _icon && _icon.classList.remove('is-reverse');
+              if (_popper.getAttribute('x-placement')) {
+                _popper.style.display = 'none';
+              }
+            });
             this.state.scrollTarget = target;
         }
     };
