@@ -251,7 +251,7 @@
     Popper.prototype.onCreate = function(callback) {
         // multiple
         var popper = document.querySelectorAll('.el-popper');
-        popper && popper.forEach(el => {
+        popper && popper.forEach(function(el) {
           if (el.getAttribute('x-placement')) {
             el.style.display = 'none';
           }
@@ -472,14 +472,23 @@
             var self = this;
             target.addEventListener('scroll', function() {
               // self.state.updateBound && self.state.updateBound();
-              var { _reference, _popper, _options } = self;
-              _reference.classList.remove('is-focus');
+              var _reference = self._reference;
+              var _popper = self._popper;
               var _input = _reference.getElementsByTagName('input')[0];
               var _icon = _reference.getElementsByClassName('el-input__icon')[0];
               _input && _input.blur();
               _icon && _icon.classList.remove('is-reverse');
+              _reference.classList.remove('is-focus');
               if (_popper.getAttribute('x-placement')) {
                 _popper.style.display = 'none';
+                //
+                let _vm = _reference.__vue__;
+                let _name = _popper.className;
+                if (_name.indexOf('el-select-dropdown') != -1 || _name.indexOf('el-time-panel') != -1) {
+                    _vm.$parent && _vm.$parent.handleClose && _vm.$parent.handleClose();
+                } else {
+                    _vm && _vm.handleClose && _vm.handleClose();
+                }
               }
             });
             this.state.scrollTarget = target;
