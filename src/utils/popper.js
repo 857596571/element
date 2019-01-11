@@ -482,8 +482,8 @@
               if (_popper.getAttribute('x-placement')) {
                 _popper.style.display = 'none';
                 //
-                let _vm = _reference.__vue__;
-                let _name = _popper.className;
+                var _vm = _reference.__vue__;
+                var _name = _popper.className;
                 if (_name.indexOf('el-select-dropdown') != -1 || _name.indexOf('el-time-panel') != -1) {
                     _vm.$parent && _vm.$parent.handleClose && _vm.$parent.handleClose();
                 } else {
