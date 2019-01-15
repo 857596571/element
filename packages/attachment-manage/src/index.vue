@@ -506,7 +506,7 @@
           }).then(function(response) {
             this.$message({
               showClose: true,
-              message: '恭喜你，删除成功',
+              message: '删除成功',
               type: 'success'
             });
             this.$refs.child.refresh_files_data();
@@ -577,7 +577,7 @@
             if (result) {
               this.$message({
                 showClose: true,
-                message: '恭喜你，提交成功',
+                message: '提交成功',
                 type: 'success'
               });
               this.upload_dialog_visible = false;
@@ -651,7 +651,7 @@
         }).then(function(response) {
           this.$message({
             showClose: true,
-            message: '恭喜你，修改成功',
+            message: '修改成功',
             type: 'success'
           });
         }, function(response) {

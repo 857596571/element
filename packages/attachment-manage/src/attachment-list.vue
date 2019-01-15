@@ -425,7 +425,7 @@
           }).then(function(response) {
             this.$message({
               showClose: true,
-              message: '恭喜你，删除成功',
+              message: '删除成功',
               type: 'success'
             });
             this.refresh_files_data();
@@ -524,7 +524,7 @@
         }).then(function(response) {
           this.$message({
             showClose: true,
-            message: '恭喜你，修改成功',
+            message: '修改成功',
             type: 'success'
           });
           this.update_dialog_visible = false;
