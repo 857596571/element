@@ -375,8 +375,8 @@
         const opt = {
           audio: false,
           video: {
-            width: 640,
-            height: 360
+            width: 3703,
+            height: 2614
           }
         };
         let self = this;
@@ -384,8 +384,9 @@
           navigator.getUserMedia(opt,
             function(stream) {
               let video = document.getElementById('video');
+              let video_bak = document.getElementById('video_bak');
               // video.src = window.URL.createObjectURL(stream);
-              video.srcObject = stream;
+              video.srcObject = video_bak.srcObject = stream;
               // video.onloadedmetadata = function(e) {
               //   console.log('capture started successfully');
               //   document.getElementById('non-video').style.display = 'none';

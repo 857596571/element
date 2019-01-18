@@ -11,7 +11,8 @@
                         <img src="../images/non-video-icon.png"/>
                         <div class="title">没有连接到摄像头!</div>
                     </div>
-                    <video id="video" ref="video" autoplay></video>
+                    <video id="video" ref="video" autoplay style="display:none"></video>
+                    <video id="video_bak" style="width:640px; height:360px;background: black;" autoplay></video>
 
                 </div>
                 <!--<button id="btn-take-picture" @click="takePicture" style="display:block;">拍照</button>-->
@@ -182,16 +183,16 @@
       };
     },
     methods: {
-      take_picture_handle: function() {
+      take_picture_handle: function() { // 3703 x 2614
         if (!this.$parent.navigatorStream || !this.$parent.navigatorStream.active) {
           return;
         }
         let canvas_node = document.createElement('canvas');
         let video = this.$refs.video;
-        canvas_node.width = 640;
-        canvas_node.height = 360;
+        canvas_node.width = 3703;
+        canvas_node.height = 2614;
         let context = canvas_node.getContext('2d');
-        context.drawImage(video, 0, 0, 640, 360);
+        context.drawImage(video, 0, 0, 3703, 2614);
         // base64
         let img_data = canvas_node.toDataURL('image/png');
         this.images_data.push(img_data);
