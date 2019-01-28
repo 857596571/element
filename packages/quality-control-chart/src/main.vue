@@ -229,7 +229,7 @@
             }
           },
           grid: {
-            left: '5%',
+            left: '7%',
             right: '11%',
             bottom: '3%',
             containLabel: true
