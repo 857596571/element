@@ -249,6 +249,13 @@
      * @param {Function} callback
      */
     Popper.prototype.onCreate = function(callback) {
+        // multiple
+        var popper = document.querySelectorAll('.el-popper');
+        popper && popper.forEach(function(el) {
+          if (el.getAttribute('x-placement')) {
+            el.style.display = 'none';
+          }
+        });
         // the createCallbacks return as first argument the popper instance
         callback(this);
         return this;
@@ -461,7 +468,29 @@
             if (target === root.document.body || target === root.document.documentElement) {
                 target = root;
             }
-            target.addEventListener('scroll', this.state.updateBound);
+            // target.addEventListener('scroll', this.state.updateBound);
+            var self = this;
+            target.addEventListener('scroll', function() {
+              // self.state.updateBound && self.state.updateBound();
+              var _reference = self._reference;
+              var _popper = self._popper;
+              var _input = _reference.getElementsByTagName('input')[0];
+              var _icon = _reference.getElementsByClassName('el-input__icon')[0];
+              _input && _input.blur();
+              _icon && _icon.classList.remove('is-reverse');
+              _reference.classList.remove('is-focus');
+              if (_popper.getAttribute('x-placement')) {
+                _popper.style.display = 'none';
+                //
+                var _vm = _reference.__vue__;
+                var _name = _popper.className;
+                if (_name.indexOf('el-select-dropdown') != -1 || _name.indexOf('el-time-panel') != -1) {
+                    _vm.$parent && _vm.$parent.handleClose && _vm.$parent.handleClose();
+                } else {
+                    _vm && _vm.handleClose && _vm.handleClose();
+                }
+              }
+            });
             this.state.scrollTarget = target;
         }
     };

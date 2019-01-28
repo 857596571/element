@@ -269,9 +269,11 @@
       },
       create_flow_data: function(data, flag) {
         if (data === null) {
-          this.having_data = false;
-          this.main_flow_list = [];
-          this.current_main_flow_status = '';
+          if (flag === 'main') {
+            this.having_data = false;
+            this.main_flow_list = [];
+            this.current_main_flow_status = '';
+          }
           // this.$refs.child.is_clear_data = true;
           return;
         } else {
@@ -452,21 +454,21 @@
       },
       //    get sample flow records data
       get_sample_flow_record_list: function(prn) {
-        this.$http.post(this.data.data_interface + 'getTransListByTypeAndPrn', {
-          pageNo: 1,
-          pageSize: 10000,
-          taskType: 1,
-          prn: prn,
-          JID: this.data.JID
-        }, {
-          emulateJSON: true
-        }).then(function(response) {
-          console.log('sample-----111115345353531111---- flow records data:');
-          console.log(response.data.list);
-          let created_list = this.create_list_for_date_time(response.data.list);
-          this.child_flow_data.sample_flow_record_list = created_list;
-        }, function(response) {
-        });
+        // this.$http.post(this.data.data_interface + 'getTransListByTypeAndPrn', {
+        //   pageNo: 1,
+        //   pageSize: 10000,
+        //   taskType: 1,
+        //   prn: prn,
+        //   JID: this.data.JID
+        // }, {
+        //   emulateJSON: true
+        // }).then(function(response) {
+        //   console.log('sample-----111115345353531111---- flow records data:');
+        //   console.log(response.data.list);
+        //   let created_list = this.create_list_for_date_time(response.data.list);
+        //   this.child_flow_data.sample_flow_record_list = created_list;
+        // }, function(response) {
+        // });
       },
       get_sample_check_list: function(prn) {
         this.child_prn_check = prn;
@@ -505,22 +507,22 @@
         return tempList;
       },
       get_sample_check_flow_record_list: function(prn) {
-        this.$http.post(this.data.data_interface + 'getTransListByTypeAndPrn', {
-          pageNo: 1,
-          pageSize: 10000,
-          taskType: 2,
-          prn: prn,
-          JID: this.data.JID
-        }, {
-          emulateJSON: true
-        }).then(function(response) {
-          console.log('sample----55555555555555555----- check flow records data:');
-          console.log(response);
-          console.log(response.data.list);
-          let created_list = this.create_list_for_date_time(response.data.list);
-          this.child_flow_data.sample_check_flow_records_list = created_list;
-        }, function(response) {
-        });
+        // this.$http.post(this.data.data_interface + 'getTransListByTypeAndPrn', {
+        //   pageNo: 1,
+        //   pageSize: 10000,
+        //   taskType: 2,
+        //   prn: prn,
+        //   JID: this.data.JID
+        // }, {
+        //   emulateJSON: true
+        // }).then(function(response) {
+        //   console.log('sample----55555555555555555----- check flow records data:');
+        //   console.log(response);
+        //   console.log(response.data.list);
+        //   let created_list = this.create_list_for_date_time(response.data.list);
+        //   this.child_flow_data.sample_check_flow_records_list = created_list;
+        // }, function(response) {
+        // });
       },
       getClickAble: function(item) {
         if ((item.type === 'flow' && item.date !== '----') ||

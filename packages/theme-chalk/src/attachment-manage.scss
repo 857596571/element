@@ -123,7 +123,7 @@
         cursor: pointer;
         color:#fff;
         padding: 10px 15px;
-        margin-left: 40%;
+        margin-left: calc(50% - 80px);
     }
 
     & .main-video_{
@@ -151,6 +151,7 @@
 
     }
     & .capture-box-main .pictures-box{
+
         position: absolute;
         right: 15px;
         top: 0px;
@@ -196,15 +197,17 @@
 
 
     & .capture-box-main .pictures-box .picture{
-        width:160px;
+        width:155px;
         padding: 10px;
         float:left;
+        box-sizing: initial;
         position: relative;
         i{
             position: absolute;
             right: 10px;
             color: #fff;
             cursor: pointer;
+            top: 16px;
         }
     }
 
@@ -343,5 +346,18 @@
     & .attachment-list .el-table__row .cell{
         white-space: nowrap;
     }
+
 }
+.pictures-box-dialog .el-dialog{
+     background: rgba(0,0,0,0);
+     box-shadow: none;
+     margin-top: 40vh !important;
+     .el-progress__text{
+         color: red
+     }
+    .el-dialog__header {
+        border: 0;
+    }
+ }
+
 

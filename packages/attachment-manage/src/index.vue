@@ -375,8 +375,8 @@
         const opt = {
           audio: false,
           video: {
-            width: 640,
-            height: 360
+            width: 3703,
+            height: 2614
           }
         };
         let self = this;
@@ -384,8 +384,9 @@
           navigator.getUserMedia(opt,
             function(stream) {
               let video = document.getElementById('video');
+              let video_bak = document.getElementById('video_bak');
               // video.src = window.URL.createObjectURL(stream);
-              video.srcObject = stream;
+              video.srcObject = video_bak.srcObject = stream;
               // video.onloadedmetadata = function(e) {
               //   console.log('capture started successfully');
               //   document.getElementById('non-video').style.display = 'none';
@@ -421,6 +422,7 @@
         this.$confirm('确认关闭？')
           .then(_ => {
             done();
+            this.loadingSubmit = false;
           })
           .catch(_ => {
           });
@@ -505,7 +507,7 @@
           }).then(function(response) {
             this.$message({
               showClose: true,
-              message: '恭喜你，删除成功',
+              message: '删除成功',
               type: 'success'
             });
             this.$refs.child.refresh_files_data();
@@ -576,7 +578,7 @@
             if (result) {
               this.$message({
                 showClose: true,
-                message: '恭喜你，提交成功',
+                message: '提交成功',
                 type: 'success'
               });
               this.upload_dialog_visible = false;
@@ -607,6 +609,7 @@
         this.upload_category = 'KHWJ';
         this.upload_remark = '';
         this.fileList = [];
+        this.loadingSubmit = false;
       },
       get_interface_url: function() {
         let upload_url = this.data.uploadUrl;
@@ -649,7 +652,7 @@
         }).then(function(response) {
           this.$message({
             showClose: true,
-            message: '恭喜你，修改成功',
+            message: '修改成功',
             type: 'success'
           });
         }, function(response) {

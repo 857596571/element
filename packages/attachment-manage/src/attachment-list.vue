@@ -104,14 +104,15 @@
                     show-overflow-tooltip
                     :formatter="formatterEncryLevel">
             </el-table-column>-->
-            <el-table-column
-                    prop="source"
-                    label="来源"
-                    show-overflow-tooltip>
-            </el-table-column>
+
             <el-table-column
                     prop="upload_tm"
                     label="修改时间"
+                    show-overflow-tooltip>
+            </el-table-column>
+            <el-table-column
+                    prop="remark"
+                    label="备注"
                     show-overflow-tooltip>
             </el-table-column>
             <el-table-column
@@ -424,7 +425,7 @@
           }).then(function(response) {
             this.$message({
               showClose: true,
-              message: '恭喜你，删除成功',
+              message: '删除成功',
               type: 'success'
             });
             this.refresh_files_data();
@@ -523,7 +524,7 @@
         }).then(function(response) {
           this.$message({
             showClose: true,
-            message: '恭喜你，修改成功',
+            message: '修改成功',
             type: 'success'
           });
           this.update_dialog_visible = false;
@@ -560,6 +561,8 @@
           prn === undefined ||
           JID === '' ||
           JID === undefined) {
+
+          this.files_list = this.files_list_full = [];
           return;
         }
 

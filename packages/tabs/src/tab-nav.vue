@@ -38,7 +38,8 @@
         navOffset: 0,
         isFocus: false,
         focusable: true,
-        isPanel: false
+        scrollVisible: false,
+        scrollHeight: 0
       };
     },
 
@@ -209,28 +210,30 @@
           <span class={['el-tabs__nav-prev', scrollable.prev ? '' : 'is-disabled']} on-click={scrollPrev}><i class="el-icon-arrow-left"></i></span>,
           <span
             class={['el-tabs__nav-next', scrollable.next ? '' : 'is-disabled']}
-            on-mouseover={() => { this.isPanel = true; }}
+            on-mouseover={(e) => { this.scrollVisible = true; this.scrollHeight = document.documentElement.clientHeight - e.y - 60; }}
           >
             <el-popover
               placement="bottom-start"
               trigger="hover"
-              value={this.isPanel}
+              value={this.scrollVisible}
             >
-              <ul class="el-tabs__panel">
-                {
-                  this._l(panes, (pane, index) => {
-                    let tabName = pane.name || pane.index || index;
-                    let tabLabelContent = pane.label;
-                    return (
-                      <li
-                        class={pane.active ? 'active' : ''}
-                        title={tabLabelContent}
-                        on-click={(ev) => { removeFocus(); onTabClick(pane, tabName, ev); this.isPanel = false; }}
-                      >{tabLabelContent}</li>
-                    );
-                  })
-                }
-              </ul>
+              <el-scrollbar noresize>
+                <ul class="el-tabs__panel" style={'max-height:' + this.scrollHeight + 'px'}>
+                  {
+                    this._l(panes, (pane, index) => {
+                      let tabName = pane.name || pane.index || index;
+                      let tabLabelContent = pane.label;
+                      return (
+                        <li
+                          class={pane.active ? 'active' : ''}
+                          title={tabLabelContent}
+                          on-click={(ev) => { removeFocus(); onTabClick(pane, tabName, ev); this.scrollVisible = false; }}
+                        >{tabLabelContent}</li>
+                      );
+                    })
+                  }
+                </ul>
+              </el-scrollbar>
               <i class="el-icon-arrow-right" slot="reference"></i>
             </el-popover>
           </span>
