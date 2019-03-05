@@ -357,6 +357,10 @@
           {
             label: '其它文件',
             value: 'QTWJ'
+          },
+          {
+            label: '报告组成',
+            value: 'BGZC'
           }
         ],
         navigatorStream: undefined,
