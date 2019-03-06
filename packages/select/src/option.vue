@@ -177,8 +177,9 @@
       },
 
       queryChange(query) {
-        const _v = this.toPinYin().convertPYs(this.currentLabel);
-        if (this.toPinYin().isMatch(query, _v)) {
+        // convertPYs => ['qingzhi', 'qz', '青之']
+        var convert = this.toPinYin().convertPYs(this.currentLabel);
+        if (this.toPinYin().isMatch(query, convert)) {
           query = this.currentLabel;
         }
         this.visible = new RegExp(escapeRegexpString(query), 'i').test(this.currentLabel) || this.created;
