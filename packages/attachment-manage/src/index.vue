@@ -385,24 +385,30 @@
         };
         let self = this;
         if (capture) {
-          navigator.getUserMedia(opt,
-            function(stream) {
-              let video = document.getElementById('video');
-              let video_bak = document.getElementById('video_bak');
-              // video.src = window.URL.createObjectURL(stream);
-              video.srcObject = video_bak.srcObject = stream;
-              // video.onloadedmetadata = function(e) {
-              //   console.log('capture started successfully');
-              //   document.getElementById('non-video').style.display = 'none';
-              //   video.play();
-              // };
-              document.getElementById('non-video').style.display = 'none';
-              self.navigatorStream = stream;
-            },
-            function(err) {
-              console.log('The following error occurred: ' + err.name);
-            }
-          );
+          var exArray = [];
+          navigator.mediaDevices.enumerateDevices()
+            .then(function(devices) {
+              devices.forEach(function(device) {
+                if (device.kind === 'videoinput') {
+                  exArray.push(device.deviceId);
+                }
+              });
+              opt.video.deviceId = {
+                exact: exArray.reverse()[0]
+              };
+              navigator.getUserMedia(opt,
+                function(stream) {
+                  let video = document.getElementById('video');
+                  let video_bak = document.getElementById('video_bak');
+                  video.srcObject = video_bak.srcObject = stream;
+                  document.getElementById('non-video').style.display = 'none';
+                  self.navigatorStream = stream;
+                },
+                function(err) {
+                  console.log('The following error occurred: ' + err.name);
+                }
+              );
+            });
         } else {
           console.log('getUserMedia not supported');
         }

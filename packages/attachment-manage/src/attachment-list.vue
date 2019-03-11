@@ -368,6 +368,9 @@
           case 'QTWJ':
             res = '其它文件';
             break;
+          case 'BGZC':
+            res = '报告组成';
+            break;
           default:
             res = '';
         }
