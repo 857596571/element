@@ -259,8 +259,10 @@
           this.validateDisabled = false;
           return;
         }
-
-        this.validate('change');
+        const elInput = this.$el.getElementsByTagName('input');
+        if (elInput.length === 0 || elInput[0] !== document.activeElement) {
+          this.validate('change');
+        }
       }
     },
     mounted() {
