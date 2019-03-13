@@ -253,7 +253,7 @@
         var popper = document.querySelectorAll('.el-popper');
         popper && popper.forEach(function(el) {
           if (el.getAttribute('x-placement')) {
-            el.style.display = 'none';
+            document.body.click();
           }
         });
         // the createCallbacks return as first argument the popper instance
@@ -480,7 +480,7 @@
               _icon && _icon.classList.remove('is-reverse');
               _reference.classList.remove('is-focus');
               if (_popper.getAttribute('x-placement')) {
-                _popper.style.display = 'none';
+                document.body.click();
                 //
                 var _vm = _reference.__vue__;
                 var _name = _popper.className;
