@@ -320,6 +320,9 @@
             timeSpan = new Date(data[i + 1].startTime) - new Date(data[i].startTime);
             let tempArray = (timeSpan / 1000 / 60 / 60).toString().split('.');
             timeSpan = tempArray[0] + '时' + Math.ceil(parseFloat('0.' + tempArray[1]) * 60) + '分';
+            if (new Date(data[i].startTime) > new Date(data[i + 1].startTime)) {
+              timeSpan = '----';
+            }
           }
 
           if (data[i].startTime !== undefined) {
