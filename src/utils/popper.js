@@ -464,8 +464,30 @@
             // target.addEventListener('scroll', this.state.updateBound);
             var self = this;
             target.addEventListener('scroll', function() {
-              if (self._reference.className.indexOf('is-focus') > -1) {
-                self._reference.click();
+              var childNode = self._reference.querySelectorAll('input')
+              var _vm = self._reference.__vue__;
+              for (var key in childNode) {
+                if (childNode[key] == document.activeElement) {
+                  self._reference.click();
+                  childNode[key].blur();
+                  // date or time components
+                  if (_vm) {
+                    if (_vm.handleClose) {
+                      _vm.handleClose();
+                    } else if (_vm.$parent && _vm.$parent.handleClose) {
+                      _vm.$parent.handleClose();
+                    }
+                  }
+                }
+              }
+              // Popover Other cases
+              var className = self._reference.className
+              if (className.indexOf('is-active') > -1) {
+                _vm && _vm.handleClose && _vm.handleClose();
+              } else if (className.indexOf('is-opened') > -1) {
+                _vm && _vm.handleClickoutside && _vm.handleClickoutside();
+              } else {
+                document.body.click();
               }
             });
             this.state.scrollTarget = target;
