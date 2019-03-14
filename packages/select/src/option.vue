@@ -135,9 +135,11 @@
       },
 
       queryChange(query) {
-        var convert = searchMatch.convertArr(this.currentLabel);
-        if (searchMatch.isMatch(query, convert)) {
-          query = this.currentLabel;
+        if (this.currentLabel && query) {
+          var convert = searchMatch.convertArr(this.currentLabel);
+          if (searchMatch.isMatch(query, convert)) {
+            query = this.currentLabel;
+          }
         }
         this.visible = new RegExp(escapeRegexpString(query), 'i').test(this.currentLabel) || this.created;
         if (!this.visible) {
