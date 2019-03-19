@@ -24,7 +24,7 @@
 
           <!--hover展示的-->
           <el-menu-item :index="$route.fullPath" v-for="(vv,ii) in v.children?v.children:v.childsList" :key="ii+'-second'" v-show="isCollapse">
-              <p class="hover_secondMenu"><span>{{vv.name?vv.name:vv.res_na}} &gt;</span><span class="hoverColor" @click.stop="see(vvv)" :index="String(vvv.name?vvv.name.split('/#')[1]:vvv.res_url_ca.split('/#')[1])" v-for="(vvv,iii) in vv.children?vv.children:vv.childsList" :key="iii+'-three'">{{vvv.name?vvv.name:vvv.res_na}}</span></p>
+              <p class="hover_secondMenu"><span>{{vv.name?vv.name:vv.res_na}}</span>&nbsp;&gt;<span class="hoverColor" @click.stop="see(vvv)" :index="String(vvv.name?vvv.name.split('/#')[1]:vvv.res_url_ca.split('/#')[1])" v-for="(vvv,iii) in vv.children?vv.children:vv.childsList" :key="iii+'-three'">{{vvv.name?vvv.name:vvv.res_na}}</span></p>
           </el-menu-item>
       </el-submenu>
    </el-menu>
@@ -173,12 +173,15 @@
   }
   .hover_secondMenu{
       color: #303133;
-      span{
+      span:nth-child(1){
+          font-weight: 700;
+      }
+      span:nth-child(1):hover{
+          cursor: default;
+      }
+      .hoverColor{
           padding: 0 10px;
           border-right: 2px solid #ddd;
-      }
-      span:hover{
-          color: #4C85FF;
       }
       span:last-child{
           border-right: none;
