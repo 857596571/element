@@ -2,6 +2,7 @@
   <el-color-picker
     class="theme-picker"
     popper-class="theme-picker-dropdown"
+    @change="getSkin"
     v-model="theme"></el-color-picker>
 </template>
 
@@ -22,7 +23,8 @@
 </style>
 
 <script>
-  import { version } from 'main/index.js';
+  // import { version } from 'main/index.js';
+  const version = require('../../package.json').version;
 
   const ORIGINAL_THEME = '#409EFF';
   export default {
@@ -87,6 +89,9 @@
     },
 
     methods: {
+      getSkin() {
+        this.$emit('setHeaderBg', this.theme);
+      },
       updateStyle(style, oldCluster, newCluster) {
         let newStyle = style;
         oldCluster.forEach((color, index) => {

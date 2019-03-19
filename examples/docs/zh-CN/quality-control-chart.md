@@ -4,11 +4,11 @@
     data() {
       return {
         propData:{
-            JID: '',
+            JID: '0FE6662335583E909cd99997-8dd2-4c07-a10e-24f572fe4721',
             echartsURL:'http://192.168.2.225/sbgl-prj/gzyq/runGzyq',
-            prn: '259695700536',
+            prn: '294263760008',
             getEchartsDataParamBtnCode: "BTN_247335599528",
-            getLineBaseParamBtnCode: "BTN_252753500664",
+            getLineBaseParamBtnCode: "BTN_252753500664"
         },
       }
         
@@ -37,11 +37,11 @@
       return {
         dialogVisible: false,
         propData:{
-            JID: '',
+            JID: '0FE6662335583E909cd99997-8dd2-4c07-a10e-24f572fe4721',
             echartsURL:'http://192.168.2.225/sbgl-prj/gzyq/runGzyq',
-            prn: '257513837040',
+            prn: '294263760008',
             getEchartsDataParamBtnCode: "BTN_247335599528",
-            getLineBaseParamBtnCode: "BTN_252753500664",
+            getLineBaseParamBtnCode: "BTN_252753500664"
         },
       };
     },
