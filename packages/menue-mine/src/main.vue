@@ -8,7 +8,7 @@
       <el-submenu :index="String(i)" v-for="(v,i) in leftMenuList" :key="i" class="firstLevelMenue">
          <template slot="title">
            <img v-if="v.resIconNo" :src="v.resIconNo" style="width: 22px;height: 22px;padding-right: 10px"/>
-           <img v-else src="@/assets/nomenueimg.png" style="width: 22px;height: 22px;padding-right: 10px"/>
+           <img v-else src="../img/nomenueimg.png" style="width: 22px;height: 22px;padding-right: 10px"/>
            <span :title="v.name?v.name:v.res_na">{{get_menu_name(v.name?v.name:v.res_na)}}</span>
          </template>
          <el-submenu v-show="!isCollapse" :index="String(vv.treeId?vv.treeId:vv.id)" v-for="(vv,ii) in v.children?v.children:v.childsList" :key="ii" class="secondLevelMenue">
