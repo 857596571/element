@@ -3,9 +3,9 @@
     
     data() {
       return {
-        // JID: localStorage.getItem('__JID__'),
-        JID: '92A87730EB59E3C786f2fd5f-5f54-4056-a08f-cfe5cbb1f32c',
-        Url: 'https://234728c28e.iok.la:10021/tu-prj/getFeMenuResToken'
+        JID: localStorage.getItem('__JID__'),
+        Url: 'http://192.168.2.225:83/tu-prj/getFeMenuResToken',
+        reqType: 'post'
       }
     }
   }
@@ -30,9 +30,9 @@
   export default {
     data() {
       return {
-        // JID: localStorage.getItem('__JID__'),
-        JID: '92A87730EB59E3C786f2fd5f-5f54-4056-a08f-cfe5cbb1f32c',
-        Url: 'https://234728c28e.iok.la:10021/tu-prj/getFeMenuResToken'
+        JID: localStorage.getItem('__JID__'),
+        Url: 'http://192.168.2.225:83/tu-prj/getFeMenuResToken',
+        reqType: 'post'
       };
     },
   };

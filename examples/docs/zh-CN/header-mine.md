@@ -3,6 +3,7 @@
     
     data() {
       return {
+        btnCodeSetSkin: 'BTN_310682130088',
         JID: localStorage.getItem('__JID__'),
         setSkinUrl: 'http://192.168.2.225/ywpz-prj/gzyq/runGzyq',
         setPasswordUrl: 'http://192.168.2.225/tu-prj/cu/update/loginpwdbyToken',
@@ -31,6 +32,7 @@
   export default {
     data() {
       return {
+        btnCodeSetSkin: 'BTN_310682130088',
         JID: localStorage.getItem('__JID__'),
         setSkinUrl: 'http://192.168.2.225/ywpz-prj/gzyq/runGzyq',
         setPasswordUrl: 'http://192.168.2.225/tu-prj/cu/update/loginpwdbyToken',
