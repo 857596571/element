@@ -364,7 +364,8 @@
           }
         ],
         navigatorStream: undefined,
-        loadingSubmit: false
+        loadingSubmit: false,
+        exArray: []
       };
     },
     methods: {
@@ -385,30 +386,32 @@
         };
         let self = this;
         if (capture) {
-          var exArray = [];
-          navigator.mediaDevices.enumerateDevices()
+          const open = () => {
+            opt.video.deviceId = {
+              exact: self.exArray[0]
+            };
+            navigator.getUserMedia(opt,
+              function(stream) {
+                let video = document.getElementById('video');
+                let video_bak = document.getElementById('video_bak');
+                video.srcObject = video_bak.srcObject = stream;
+                document.getElementById('non-video').style.display = 'none';
+                self.navigatorStream = stream;
+              },
+              function(err) {
+                console.log('The following error occurred: ' + err.name);
+              }
+            );
+          };
+          self.exArray.length === 0 ? navigator.mediaDevices.enumerateDevices()
             .then(function(devices) {
               devices.forEach(function(device) {
                 if (device.kind === 'videoinput') {
-                  exArray.push(device.deviceId);
+                  self.exArray.push(device.deviceId);
                 }
               });
-              opt.video.deviceId = {
-                exact: exArray.reverse()[0]
-              };
-              navigator.getUserMedia(opt,
-                function(stream) {
-                  let video = document.getElementById('video');
-                  let video_bak = document.getElementById('video_bak');
-                  video.srcObject = video_bak.srcObject = stream;
-                  document.getElementById('non-video').style.display = 'none';
-                  self.navigatorStream = stream;
-                },
-                function(err) {
-                  console.log('The following error occurred: ' + err.name);
-                }
-              );
-            });
+              open();
+            }) : open();
         } else {
           console.log('getUserMedia not supported');
         }
