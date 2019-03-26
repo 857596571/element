@@ -5,10 +5,10 @@
          <span style="color: #303133!important;font-weight:normal;">&nbsp;&nbsp;网站导航</span>
       </el-menu-item>
 
-      <el-submenu :index="String(i)" v-for="(v,i) in leftMenuList" :key="i" class="firstLevelMenue">
+      <el-submenu :index="String(i)"  @mouseenter.native="mouseenter" v-for="(v,i) in leftMenuList" :key="i" class="firstLevelMenue">
          <template slot="title">
-           <img v-if="v.resIconNo" :src="v.resIconNo" style="width: 22px;height: 22px;padding-right: 10px"/>
-           <img v-else src="../img/nomenueimg.png" style="width: 22px;height: 22px;padding-right: 10px"/>
+           <img v-if="v.resIconNo" :src="v.resIconNo" style="width: 22px;height: 22px;"/>
+           <img v-else src="../img/nomenueimg.png" style="width: 22px;height: 22px;"/>
            <span :title="v.name?v.name:v.res_na">{{get_menu_name(v.name?v.name:v.res_na)}}</span>
          </template>
          <el-submenu v-show="!isCollapse" :index="String(vv.treeId?vv.treeId:vv.id)" v-for="(vv,ii) in v.children?v.children:v.childsList" :key="ii" class="secondLevelMenue">
@@ -23,9 +23,9 @@
          </el-submenu>
 
           <!--hover展示的-->
-          <el-menu-item :index="$route.fullPath" v-for="(vv,ii) in v.children?v.children:v.childsList" :key="ii+'-second'" v-show="isCollapse">
+          <div class="el-menu-item" v-for="(vv,ii) in v.children?v.children:v.childsList" :key="ii+'-second'" v-show="isCollapse">
               <p class="hover_secondMenu"><span>{{vv.name?vv.name:vv.res_na}}</span>&nbsp;&gt;<span class="hoverColor" @click.stop="see(vvv)" :index="String(vvv.name?vvv.name.split('/#')[1]:vvv.res_url_ca.split('/#')[1])" v-for="(vvv,iii) in vv.children?vv.children:vv.childsList" :key="iii+'-three'">{{vvv.name?vvv.name:vvv.res_na}}</span></p>
-          </el-menu-item>
+          </div>
       </el-submenu>
    </el-menu>
 </template>
@@ -55,6 +55,21 @@
       this.getMenueList();
     },
     methods: {
+      // 折叠后菜单hover三级溢出处理
+      mouseenter() {
+        setTimeout(()=> {
+          if (this.isCollapse) {
+            let doms = document.body.getElementsByClassName('el-menu--vertical');
+            for (var key = 0;key <= doms.length;key++) {
+              if (doms[key].style.display === '') {
+                let dom = doms[key].children[0];
+                dom.style.maxHeight = document.body.clientHeight - doms[key].style.top.split('px')[0] + 'px';
+                dom.style.overflow = 'auto';
+              }
+            }
+          }
+        }, 400);
+      },
       see(vvv) {
         let JID = localStorage.getItem('__JID__');
         // 判断是否是ks
