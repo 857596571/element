@@ -140,7 +140,7 @@
                                         ref="upload"
                                         :auto-upload="false">
                                     <el-button size="small" type="primary" id="upload">点击上传</el-button>
-                                    <div slot="tip" class="el-upload__tip">支持格式xsl,pdf,doc,png,jpg文件; 且不超过20M</div>
+                                    <div slot="tip" class="el-upload__tip">支持格式xls,pdf,doc,png,jpg文件; 且不超过20M</div>
                                 </el-upload>
                             </div>
                         </td>
