@@ -7,9 +7,9 @@
     :collapse="isCollapse"
     :style="{ width: isCollapse ? '45px' : '200px' }"
   >
-    <el-menu-item @click="isCollapse = !isCollapse" :index="$route.path">
-      <img src="../img/menue.png" style="margin:0 auto;width: 25px;height: 25px;">
-      <span style="color: #303133!important;font-weight:normal;">&nbsp;&nbsp;网站导航</span>
+    <el-menu-item @click="isCollapse = !isCollapse" :index="$route.path" class="navigate">
+      <i class="el-icon-qz-menu"></i>
+      <span>网站导航</span>
     </el-menu-item>
 
     <el-submenu
@@ -196,6 +196,17 @@ export default {
 
 <style lang='scss'>
 .el-menue-mine {
+  .navigate {
+    i {
+      font-size: 24px;
+      color: #898989 !important;
+    }
+    span {
+      margin-left: 5px;
+      font-weight: normal;
+      color: #303133;
+    }
+  }
   .el-submenu__icon-arrow {
     display: none;
   }
@@ -225,6 +236,10 @@ export default {
     padding: 0 0 0 47px !important;
     font-weight: 700;
     font-size: 12px;
+    span {
+      padding-left: 0;
+      width: 100%;
+    }
   }
   .threeLevelMenue {
     padding-right: 12px;

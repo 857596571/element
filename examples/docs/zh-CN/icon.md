@@ -4,7 +4,8 @@
   export default {
     data() {
       return {
-        icons: iconList
+        icons: iconList,
+        icons2: ['home', 'skin', 'ohm', 'user', 'menu']
       };
     }
   }
@@ -100,3 +101,15 @@
     </span>
   </li>
 </ul>
+
+### 自定义
+
+<ul class="icon-list">
+  <li v-for="name in icons2" :key="name">
+    <span>
+      <i :class="'el-icon-qz-' + name"></i>
+      <span class="icon-name">{{'el-icon-qz-' + name}}</span>
+    </span>
+  </li>
+</ul>
+
