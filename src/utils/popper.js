@@ -249,6 +249,17 @@
      * @param {Function} callback
      */
     Popper.prototype.onCreate = function(callback) {
+        // multiple
+        var popper = document.querySelectorAll('.el-popper');
+        var showNum = 0
+        popper && popper.forEach(function(el) {
+          if (el.getAttribute('x-placement')) {
+            showNum++;
+          }
+        });
+        if (showNum > 1) {
+          document.body.click();
+        }
         // the createCallbacks return as first argument the popper instance
         callback(this);
         return this;

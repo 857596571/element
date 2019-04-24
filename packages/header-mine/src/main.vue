@@ -1,11 +1,7 @@
 <template>
   <div class="el-header-mine clearfix" :style="{ background: headerBg }">
     <div class="headerleft">
-      <img
-        class="hoverItem"
-        @click="toHome"
-        src="http://47.92.143.222:82/files/formal/logo/311531533984.png"
-      >
+      <img @click="toHome" src="/files/formal//logo//311531533984.png">
     </div>
 
     <div class="headerRight">
@@ -29,83 +25,86 @@
           <el-dropdown-item command="setInfo">修改密码</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      
-      <el-dialog
-        class="editeInfo"
-        :modal="false"
+    </div>
+
+    <el-dialog
+        class="header-mine-dialog header-mine-password"
         title="修改密码"
         width="500px"
-        :visible.sync="dialogFormVisible"
-      >
-        <el-form
-          ref="updateUserRef"
-          :rules="formDataRules"
-          :model="updateUser_formData"
-          label-width="100px"
-        >
-          <el-form-item label="用户名:">
-            <el-input :disabled="true" v-model="updateUser_formData.username"></el-input>
-          </el-form-item>
-          <el-form-item label="当前密码:" prop="passWord">
-            <el-input
-              clearable
-              type="password"
-              v-model="updateUser_formData.passWord"
-              placeholder="请输入当前密码"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="新密码:" prop="newPassword">
-            <el-input
-              type="password"
-              clearable
-              v-model="updateUser_formData.newPassword"
-              @blur="checkPW"
-              placeholder="请输入新密码"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="确认密码:" prop="checkPw">
-            <el-input
-              :class="{isRedBorder:isPwDiffer,isGreenBorder:!isPwDiffer}"
-              type="password"
-              clearable
-              @blur="checkPW"
-              v-model="updateUser_formData.checkPw"
-              placeholder="请再次输入新密码"
-            ></el-input>
-            <span class="erroInput" v-if="isPwDiffer">两次密码不一致!</span>
-          </el-form-item>
-        </el-form>
-        <div style="text-align: center">
-          <el-button size="small" type="primary" @click="setPw">确定</el-button>
-          <el-button size="small" @click="dialogFormVisible=false">取消</el-button>
-        </div>
-      </el-dialog>
-
-      <el-dialog
-        title="系统皮肤"
-        :modal="false"
-        :visible.sync="centerDialogVisible"
-        width="380px"
-        :show-close="false"
-        custom-class="dialog_skin"
         center
-      >
+        append-to-body
+        :close-on-click-modal="false"
+        :visible.sync="dialogFormVisible"
+    >
+        <el-form
+            ref="updateUserRef"
+            label-width="100px"
+            :rules="formDataRules"
+            :model="updateUser_formData"
+        >
+            <el-form-item label="用户名:">
+                <el-input :disabled="true" v-model="updateUser_formData.username"></el-input>
+            </el-form-item>
+            <el-form-item label="当前密码:" prop="passWord">
+                <el-input
+                    clearable
+                    type="password"
+                    v-model="updateUser_formData.passWord"
+                    placeholder="请输入当前密码"
+                ></el-input>
+            </el-form-item>
+            <el-form-item label="新密码:" prop="newPassword">
+                <el-input
+                    type="password"
+                    clearable
+                    v-model="updateUser_formData.newPassword"
+                    @blur="checkPW"
+                    placeholder="请输入新密码"
+                ></el-input>
+            </el-form-item>
+            <el-form-item label="确认密码:" prop="checkPw">
+                <!-- :class="{isRedBorder:isPwDiffer,isGreenBorder:!isPwDiffer}" -->
+                <el-input
+                    :class="isPwDiffer?'form-error-tips':''"
+                    type="password"
+                    clearable
+                    @blur="checkPW"
+                    v-model="updateUser_formData.checkPw"
+                    placeholder="请再次输入新密码"
+                ></el-input>
+                <span v-if="isPwDiffer">两次密码不一致!</span>
+            </el-form-item>
+        </el-form>
+        <template slot="footer">
+            <el-button size="small" type="primary" @click="setPw">确定</el-button>
+            <el-button size="small" @click="dialogFormVisible=false">取消</el-button>
+        </template>
+    </el-dialog>
+
+    <el-dialog
+        class="header-mine-dialog header-mine-skin"
+        title="系统皮肤"
+        width="380px"
+        center
+        append-to-body
+        :close-on-click-modal="false"
+        :visible.sync="centerDialogVisible"
+    >
         <ul>
-          <li :key="i" v-for="(item,i) in skinBox">
-            <div @click="selectSkin(item)" :class="item.css">
-              {{item.skinName}}
-              <span v-show="item.show" class="icon_ok">
-                <i class="el-icon-circle-check-outline"></i>
-              </span>
-            </div>
-          </li>
+            <li :key="i" v-for="(item,i) in skinBox">
+                <div @click="selectSkin(item)" :class="item.css">
+                    {{item.skinName}}
+                    <span v-show="item.show" class="icon_ok">
+                        <i class="el-icon-circle-check-outline"></i>
+                    </span>
+                </div>
+            </li>
         </ul>
-        <span slot="footer">
-          <el-button size="small" type="primary" @click="setSkin">确 定</el-button>
-          <el-button size="small" @click="centerDialogVisible = false">取 消</el-button>
-        </span>
-      </el-dialog>
-    </div>
+        <template slot="footer">
+            <el-button size="small" type="primary" @click="setSkin">确 定</el-button>
+            <el-button size="small" @click="centerDialogVisible = false">取 消</el-button>
+        </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -191,7 +190,7 @@ export default {
   },
   methods: {
     openSkinPop() {
-      const skin = localStorage.getItem('skin');
+      const skin = localStorage.getItem('skin') || 'blueSkin';
       this.centerDialogVisible = true;
       this.skinBox.forEach(v => {
         if (v.css === skin) {
@@ -337,7 +336,7 @@ export default {
 
 <style lang='scss'>
 .el-header-mine {
-  padding: 0 10px;
+  padding: 0 20px;
   &.clearfix {
     zoom: 1;
     &:after {
@@ -354,6 +353,10 @@ export default {
   .headerRight {
     height: 60px;
     line-height: 60px;
+    img {
+      vertical-align: middle;
+      cursor: pointer;
+    }
   }
   .headerleft {
     float: left;
@@ -392,87 +395,86 @@ export default {
         }
       }
     }
-    // 密码修改
-    .editeInfo {
-      .el-dialog__header {
-        height: 40px;
-        line-height: 40px;
-        border-bottom: none;
-        span {
-          float: none;
-          font-size: 16px;
-          font-weight: bold;
+  }
+}
+.header-mine-dialog {
+  .el-dialog {
+    border-radius: 10px;
+    .el-dialog__title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .el-dialog__body {
+      padding: 20px;
+    }
+  }
+}
+.header-mine-password {
+  .el-dialog__header {
+    text-align: left;
+  }
+  .el-dialog__body {
+    .el-form {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .el-form-item {
+      /* &:last-child {
+        margin-bottom: 0;
+      } */
+      .form-error-tips {
+        .el-input__inner {
+          border-color: #f56b6b;
         }
-      }
-      .el-dialog__body {
-        padding: 24px 20px;
-        .el-form-item {
-          width: 94%;
-          line-height: 50px;
-        }
-        .erroInput {
-          position: absolute;
-          top: 28px;
-          left: 0;
-          color: #f56b6b;
+        &+span {
           font-size: 12px;
-        }
-        // 验证框色
-        .isRedBorder .el-input__inner {
-          border-color: #f56c6c !important;
-        }
-        .el-form-item.is-success .isGreenBorder .el-input__inner {
-          border-color: #4c85ff !important;
-        }
-        .el-form-item.is-error .isGreenBorder .el-input__inner {
-          border-color: #f56c6c !important;
+          color: #f56b6b;
+          line-height: normal;
+          position: absolute;
+          bottom: -17px;
+          left: 0;
+          z-index: 9;
         }
       }
     }
-    // 换肤
-    .dialog_skin {
-      .el-dialog__header {
-        padding: 0 !important;
-        height: 40px !important;
-        line-height: 40px !important;
-        .el-dialog__title {
-          font-weight: bold;
-        }
-      }
-      .el-dialog__body {
-        padding: 0 25px !important;
-        ul {
-          padding: 0;
-          margin: 0 auto;
-          li {
-            display: inline-block;
-            padding: 8px;
-            width: 50%;
-            box-sizing: border-box;
-            & > div {
-              background-color: #67bcff;
-              color: #fff;
-              height: 100px;
-              text-align: center;
-              line-height: 100px;
-              position: relative;
-              .icon_ok {
-                position: absolute;
-                top: -34px;
-                right: 5px;
-                .el-icon-circle-check-outline {
-                  font-size: 20px;
-                }
-              }
-            }
-            & > div:hover {
-              cursor: pointer;
-              opacity: 0.5;
-            }
-            .greenSkin {
-              background-color: #2dcf49;
-            }
+  }
+}
+.header-mine-skin {
+  /* .el-dialog__header {
+      border-bottom: 2px solid #67bcff;
+  } */
+  .el-dialog__body {
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      li {
+        display: inline-block;
+        padding: 8px;
+        width: 50%;
+        box-sizing: border-box;
+        div {
+          background-color: #67bcff;
+		  color: #fff;
+		  height: 100px;
+		  line-height: 100px;
+		  text-align: center;
+          position: relative;
+          cursor: pointer;
+          .icon_ok {
+			position: absolute;
+			top: -34px;
+			right: 5px;
+			.el-icon-circle-check-outline {
+			  font-size: 20px;
+			}
           }
+          &:hover {
+            opacity: 0.5;
+          }
+        }
+        .greenSkin {
+          background-color: #2dcf49;
         }
       }
     }
