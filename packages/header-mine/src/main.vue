@@ -267,7 +267,7 @@ export default {
           type: 'warning'
         }).then(() => {
           this.loginOut();
-        });
+        }).catch(() => {});
       }
     },
     loginOut() {
