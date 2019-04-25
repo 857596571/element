@@ -186,7 +186,8 @@ export default {
   mounted() {
     this.getMenueList();
     // ks
-    var value = this.$route.path.split('ks')[1];
+    var path = this.$route.path;
+    var value = path && (path.includes('/ks') || path.includes('/preview/'));
     if (value) {
       this.$emit('selectMenue', value);
     }
