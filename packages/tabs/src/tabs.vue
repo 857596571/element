@@ -20,7 +20,8 @@
         default: 'top'
       },
       beforeLeave: Function,
-      stretch: Boolean
+      stretch: Boolean,
+      icontabs: Boolean
     },
 
     provide() {
@@ -55,6 +56,9 @@
     },
 
     methods: {
+      handleTabshow() {
+        this.$emit('tab-show', null);
+      },
       calcPaneInstances() {
         if (this.$slots.default) {
           const paneSlots = this.$slots.default.filter(vnode => vnode.tag &&
@@ -116,9 +120,17 @@
         editable,
         addable,
         tabPosition,
-        stretch
+        stretch,
+        icontabs,
+        handleTabshow
       } = this;
 
+      const showButton = icontabs ? (
+        //  style="float:right;postion:fixed;top:50%">
+        <span class="el-tabs__show" on-click={ handleTabshow } tabindex="-1" style="float:right;height:18px;line-height:18px">
+          <i class="el-icon-menu"></i>
+        </span>
+      ) : null;
       const newButton = editable || addable
         ? (
           <span
@@ -147,6 +159,7 @@
       const header = (
         <div class={['el-tabs__header', `is-${tabPosition}`]}>
           {newButton}
+          {showButton}
           <tab-nav { ...navData }></tab-nav>
         </div>
       );
