@@ -140,7 +140,7 @@
                                         ref="upload"
                                         :auto-upload="false">
                                     <el-button size="small" type="primary" id="upload">点击上传</el-button>
-                                    <div slot="tip" class="el-upload__tip">支持格式xls,pdf,doc,png,jpg文件; 且不超过20M</div>
+                                    <div slot="tip" class="el-upload__tip">支持格式xls,xlsx,pdf,doc,png,jpg文件; 且不超过20M</div>
                                 </el-upload>
                             </div>
                         </td>
@@ -284,7 +284,7 @@
         update_business_no: '',
         search_keywords: '',
         fileList: [],
-        set_file_type: '.jpg,.png,.doc,.pdf,.xsl,.docx',
+        set_file_type: '.jpg,.png,.doc,.pdf,.xlsx,.xls,.docx',
         uploaded_response: [],
         all_files: {},
         pre_interface_url: null,
@@ -452,13 +452,21 @@
       beforeRemove(file, fileList) {
       },
       beforeUpload(file) {
+        let arr = ['.xls', '.xlsx', '.pdf', '.doc', '.png', '.jpg'];
         const isFile20M = file.size / 1024 / 1024 < 20;
+        let ind = file.name.lastIndexOf('.');
+        let ext = file.name.substr(ind).toLowerCase();
+        console.log(ext);
+        if (!arr.includes(ext)) {
+          this.$message.warning('文件格式不支持上传');
+          this.loadingSubmit = false;
+          return false;
+        };
         if (!isFile20M) {
-          this.$message.warning('上传文件不能超过20M！');
+          this.$message.warning('上传文件不能超过20M!');
           this.loadingSubmit = false;
           return false;
         }
-
       },
       upload_success(response, file, fileList) {
         this.uploaded_response = [...this.uploaded_response, ...fileList];

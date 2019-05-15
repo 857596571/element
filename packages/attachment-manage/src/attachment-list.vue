@@ -79,7 +79,7 @@
                          :title="scope.row.file_name"/>
                     <img v-if="compute_file_type(scope.row.file_name) === 'pdf'" src="../images/pdf-icon.png"
                          :title="scope.row.file_name"/>
-                    <img v-if="compute_file_type(scope.row.file_name) === 'xlsx' ||
+                    <img v-if="compute_file_type(scope.row.file_name) === 'xlsx' || 
                                 compute_file_type(scope.row.file_name) === 'xls'" src="../images/xsl-icon.png"
                          :title="scope.row.file_name"/>
                     {{ get_file_name(scope.row.file_name) }}

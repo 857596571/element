@@ -126,8 +126,7 @@
       } = this;
 
       const showButton = icontabs ? (
-        //  style="float:right;postion:fixed;top:50%">
-        <span class="el-tabs__show" on-click={ handleTabshow } tabindex="-1" style="float:right;height:18px;line-height:18px">
+        <span class="el-tabs__show" on-mouseover={ handleTabshow } tabindex="-1" style="float:right;height:18px;line-height:18px;">
           <i class="el-icon-menu"></i>
         </span>
       ) : null;
@@ -196,3 +195,8 @@
     }
   };
 </script>
+<style lang="scss">
+  .el-tabs__show:hover{
+    cursor: pointer;
+  }
+</style>
