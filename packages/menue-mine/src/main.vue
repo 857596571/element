@@ -101,6 +101,7 @@ export default {
             if (doms[key] && doms[key].style.display === '') {
               let dom = doms[key].children[0];
               dom.style.maxHeight = document.body.clientHeight - doms[key].style.top.split('px')[0] + 'px';
+              dom.style.maxWidth = document.body.clientWidth - doms[key].style.left.split('px')[0] + 'px';
               dom.style.overflow = 'auto';
             }
           }

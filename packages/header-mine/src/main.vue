@@ -2,6 +2,7 @@
   <div class="el-header-mine clearfix" :style="{ background: headerBg }">
     <div class="headerleft">
       <img @click="toHome" src="/files/formal//logo//311531533984.png">
+        <span style="font-size: 18px;color: #fff;">{{getTitle}}</span>
     </div>
 
     <div class="headerRight">
@@ -153,7 +154,9 @@ export default {
   data: function() {
     const skin = localStorage.getItem('skin');
     const userInfo = localStorage.getItem('userInfo');
+    const title = JSON.parse(localStorage.getItem('title')).title;
     return {
+      getTitle: title,
       headerBg: skin && skin.includes('green') ? '#0A3464' : '#4C85FF',
       centerDialogVisible: false,
       skinBox: [
