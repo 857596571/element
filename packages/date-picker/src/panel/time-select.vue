@@ -11,6 +11,7 @@
           v-for="item in items"
           :class="{ selected: value === item.value, disabled: item.disabled, default: item.value === defaultValue }"
           :disabled="item.disabled"
+          :key="item.value"
           @click="handleClick(item)">{{ item.value }}</div>
       </el-scrollbar>
     </div>
@@ -18,8 +19,8 @@
 </template>
 
 <script type="text/babel">
-  import ElScrollbar from 'element-ui-qz/packages/scrollbar';
-  import scrollIntoView from 'element-ui-qz/src/utils/scroll-into-view';
+  import ElScrollbar from 'element-ui/packages/scrollbar';
+  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
 
   const parseTime = function(time) {
     const values = (time || '').split(':');

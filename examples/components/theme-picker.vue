@@ -6,26 +6,26 @@
     v-model="theme"></el-color-picker>
 </template>
 
-<style>
+<style lang="scss">
   .theme-picker {
     height: 80px;
     display: inline-block;
-    @utils-vertical-center;
+    // @utils-vertical-center;
   }
 
   .theme-picker .el-color-picker__trigger {
     vertical-align: middle;
   }
-
+  
   .theme-picker-dropdown .el-color-dropdown__link-btn {
     display: none;
   }
 </style>
 
 <script>
-  // import { version } from 'main/index.js';
+  // import Element from 'main/index.js';
+  // const { version } = Element;
   const version = require('../../package.json').version;
-
   const ORIGINAL_THEME = '#409EFF';
   export default {
     data() {
@@ -60,7 +60,7 @@
         const docsHandler = getHandler('docs', 'docs-style');
 
         if (!this.chalk) {
-          const url = `https://unpkg.com/element-ui-qz@${ version }/lib/theme-chalk/index.css`;
+          const url = `https://unpkg.com/element-ui@${ version }/lib/theme-chalk/index.css`;
           this.getCSSString(url, chalkHandler, 'chalk');
         } else {
           chalkHandler();

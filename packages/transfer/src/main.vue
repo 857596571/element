@@ -42,11 +42,11 @@
 </template>
 
 <script>
-  import ElButton from 'element-ui-qz/packages/button';
-  import Emitter from 'element-ui-qz/src/mixins/emitter';
-  import Locale from 'element-ui-qz/src/mixins/locale';
+  import ElButton from 'element-ui/packages/button';
+  import Emitter from 'element-ui/src/mixins/emitter';
+  import Locale from 'element-ui/src/mixins/locale';
   import TransferPanel from './transfer-panel.vue';
-  import Migrating from 'element-ui-qz/src/mixins/migrating';
+  import Migrating from 'element-ui/src/mixins/migrating';
 
   export default {
     name: 'ElTransfer',
@@ -136,15 +136,23 @@
         const key = this.props.key;
         return this.data.reduce((o, cur) => (o[cur[key]] = cur) && o, {});
       },
-
+  
       sourceData() {
         return this.data.filter(item => this.value.indexOf(item[this.props.key]) === -1);
       },
 
       targetData() {
-        return this.targetOrder === 'original'
-          ? this.data.filter(item => this.value.indexOf(item[this.props.key]) > -1)
-          : this.value.map(key => this.dataObj[key]);
+        if (this.targetOrder === 'original') {
+          return this.data.filter(item => this.value.indexOf(item[this.props.key]) > -1);
+        } else {
+          return this.value.reduce((arr, cur) => {
+            const val = this.dataObj[cur];
+            if (val) {
+              arr.push(val);
+            }
+            return arr;
+          }, []);
+        }
       },
 
       hasButtonTexts() {

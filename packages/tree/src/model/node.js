@@ -1,4 +1,4 @@
-import objectAssign from 'element-ui-qz/src/utils/merge';
+import objectAssign from 'element-ui/src/utils/merge';
 import { markNodeData, NODE_KEY } from './util';
 
 export const getChildState = node => {
@@ -71,6 +71,7 @@ export default class Node {
     this.expanded = false;
     this.parent = null;
     this.visible = true;
+    this.isCurrent = false;
 
     for (let name in options) {
       if (options.hasOwnProperty(name)) {
@@ -123,6 +124,7 @@ export default class Node {
 
     if (key && store.currentNodeKey !== undefined && this.key === store.currentNodeKey) {
       store.currentNode = this;
+      store.currentNode.isCurrent = true;
     }
 
     if (store.lazy) {
@@ -154,10 +156,6 @@ export default class Node {
 
   get label() {
     return getPropertyFromData(this, 'label');
-  }
-
-  get icon() {
-    return getPropertyFromData(this, 'icon');
   }
 
   get key() {

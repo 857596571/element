@@ -1,7 +1,7 @@
 <script>
-  import { isDef } from 'element-ui-qz/src/utils/shared';
-  import scrollIntoView from 'element-ui-qz/src/utils/scroll-into-view';
-  import { generateId } from 'element-ui-qz/src/utils/util';
+  import { isDef } from 'element-ui/src/utils/shared';
+  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
+  import { generateId } from 'element-ui/src/utils/util';
 
   const copyArray = (arr, props) => {
     if (!arr || !Array.isArray(arr) || !props) return arr;
@@ -63,7 +63,6 @@
 
     computed: {
       activeOptions: {
-        cache: false,
         get() {
           const activeValue = this.activeValue;
           const configurableProps = ['label', 'value', 'children', 'disabled'];
@@ -285,7 +284,7 @@
               id = { itemId }
               aria-owns = { !item.children ? null : ownsId }
             >
-              {item.label}
+              <span>{item.label}</span>
             </li>
           );
         });

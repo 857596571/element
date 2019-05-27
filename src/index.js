@@ -69,13 +69,19 @@ import Header from '../packages/header/index.js';
 import Aside from '../packages/aside/index.js';
 import Main from '../packages/main/index.js';
 import Footer from '../packages/footer/index.js';
+import Timeline from '../packages/timeline/index.js';
+import TimelineItem from '../packages/timeline-item/index.js';
+import Link from '../packages/link/index.js';
+import Divider from '../packages/divider/index.js';
+import Image from '../packages/image/index.js';
+import Calendar from '../packages/calendar/index.js';
 import AttachmentManage from '../packages/attachment-manage/index.js';
 import FlowRecord from '../packages/flow-record/index.js';
 import QualityControlChart from '../packages/quality-control-chart/index.js';
 import HeaderMine from '../packages/header-mine/index.js';
 import MenueMine from '../packages/menue-mine/index.js';
-import locale from 'element-ui-qz/src/locale';
-import CollapseTransition from 'element-ui-qz/src/transitions/collapse-transition';
+import locale from 'element-ui/src/locale';
+import CollapseTransition from 'element-ui/src/transitions/collapse-transition';
 
 const components = [
   Pagination,
@@ -143,6 +149,12 @@ const components = [
   Aside,
   Main,
   Footer,
+  Timeline,
+  TimelineItem,
+  Link,
+  Divider,
+  Image,
+  Calendar,
   AttachmentManage,
   FlowRecord,
   QualityControlChart,
@@ -181,8 +193,8 @@ if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
-module.exports = {
-  version: '1.4.9',
+export default {
+  version: '2.8.2',
   locale: locale.use,
   i18n: locale.i18n,
   install,
@@ -256,11 +268,15 @@ module.exports = {
   Aside,
   Main,
   Footer,
+  Timeline,
+  TimelineItem,
+  Link,
+  Divider,
+  Image,
+  Calendar,
   AttachmentManage,
   FlowRecord,
   QualityControlChart,
   HeaderMine,
   MenueMine
 };
-
-module.exports.default = module.exports;

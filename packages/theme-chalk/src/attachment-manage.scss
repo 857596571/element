@@ -24,10 +24,6 @@
         border:0px !important;
     }
 
-    &{
-
-    }
-
     & ul{
         margin-bottom: 20px !important;
         display: inline-block;
@@ -147,11 +143,7 @@
         text-align: center;
     }
 
-    & .capture-box-main .capture-box-main-video{
-
-    }
     & .capture-box-main .pictures-box{
-
         position: absolute;
         right: 15px;
         top: 0px;
@@ -160,7 +152,6 @@
             border-radius: 8px;
         }
         .save {
-
             position: absolute;
             bottom: 5px;
             left: 75px;
@@ -173,8 +164,6 @@
                 margin-left: 10px;
                 color: #fff;
             }
-
-
         }
         .context{
             height: 360px;
@@ -188,13 +177,11 @@
         z-index: 99;
     }
 
-
     & .capture-box-main .pictures-box{
         max-width: 420px;
         background-color: #FAFAFA;
         min-height: 360px;
     }
-
 
     & .capture-box-main .pictures-box .picture{
         width:155px;
@@ -210,7 +197,6 @@
             top: 16px;
         }
     }
-
 
     & .capture-box-main .pictures-box .link_button_box{
         position: absolute;

@@ -1,34 +1,3 @@
-<style>
-  .demo-layout {
-    .el-row {
-      margin-bottom: 20px;
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-    .el-col {
-      border-radius: 4px;
-    }
-    .bg-purple-dark {
-      background: #99a9bf;
-    }
-    .bg-purple {
-      background: #d3dce6;
-    }
-    .bg-purple-light {
-      background: #e5e9f2;
-    }
-    .grid-content {
-      border-radius: 4px;
-      min-height: 36px;
-    }
-    .row-bg {
-      padding: 10px 0;
-      background-color: #f9fafc;
-    }
-  }
-</style>
-
 ## Layout 布局
 
 通过基础的 24 分栏，迅速简便地创建布局。
@@ -345,7 +314,7 @@
 Element 额外提供了一系列类名，用于在某些条件下隐藏元素。这些类名可以添加在任何 DOM 元素或自定义组件上。如果需要，请自行引入以下文件：
 
 ```js
-import 'element-ui-qz/lib/theme-chalk/display.css';
+import 'element-ui/lib/theme-chalk/display.css';
 ```
 
 包含的类名及其含义为：

@@ -35,7 +35,7 @@
   </label>
 </template>
 <script>
-  import Emitter from 'element-ui-qz/src/mixins/emitter';
+  import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElRadioButton',
@@ -99,7 +99,7 @@
         return this.disabled || this._radioGroup.disabled || (this.elForm || {}).disabled;
       },
       tabIndex() {
-        return !this.isDisabled ? (this._radioGroup ? (this.value === this.label ? 0 : -1) : 0) : -1;
+        return (this.isDisabled || (this._radioGroup && this.value !== this.label)) ? -1 : 0;
       }
     },
 

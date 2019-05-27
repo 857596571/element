@@ -1,6 +1,6 @@
-import { hasClass, addClass, removeClass } from 'element-ui-qz/src/utils/dom';
-import ElCheckbox from 'element-ui-qz/packages/checkbox';
-import ElTag from 'element-ui-qz/packages/tag';
+import { hasClass, addClass, removeClass } from 'element-ui/src/utils/dom';
+import ElCheckbox from 'element-ui/packages/checkbox';
+import ElTag from 'element-ui/packages/tag';
 import Vue from 'vue';
 import FilterPanel from './filter-panel.vue';
 import LayoutObserver from './layout-observer';
@@ -210,7 +210,8 @@ export default {
 
   mounted() {
     const { prop, order } = this.defaultSort;
-    this.store.commit('sort', { prop, order });
+    const init = true;
+    this.store.commit('sort', { prop, order, init });
   },
 
   beforeDestroy() {
@@ -302,7 +303,8 @@ export default {
       return classes.join(' ');
     },
 
-    toggleAllSelection() {
+    toggleAllSelection(event) {
+      event.stopPropagation();
       this.store.commit('toggleAllSelection');
     },
 
@@ -467,7 +469,9 @@ export default {
 
     handleSortClick(event, column, givenOrder) {
       event.stopPropagation();
-      let order = givenOrder || this.toggleOrder(column);
+      let order = column.order === givenOrder
+        ? null
+        : (givenOrder || this.toggleOrder(column));
 
       let target = event.target;
       while (target && target.tagName !== 'TH') {
@@ -498,8 +502,6 @@ export default {
 
       if (!order) {
         sortOrder = column.order = null;
-        states.sortingColumn = null;
-        sortProp = null;
       } else {
         sortOrder = column.order = order;
       }

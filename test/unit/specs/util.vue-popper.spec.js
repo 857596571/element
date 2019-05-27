@@ -1,4 +1,4 @@
-import VuePopper from 'element-ui-qz/src/utils/vue-popper';
+import VuePopper from 'element-ui/src/utils/vue-popper';
 import { createTest } from '../util';
 
 const Popper = Object.assign({}, VuePopper, {
@@ -139,7 +139,7 @@ describe('Utils:VuePopper', () => {
     const vm = createTest(Popper, {
       visibleArrow: true
     });
-    expect(vm.appended).to.empty;
+    expect(vm.appended).to.be.undefined;
     vm.createPopper();
     expect(vm.appended).to.true;
     vm.appendArrow();
@@ -155,7 +155,7 @@ describe('Utils:VuePopper', () => {
       visibleArrow: true,
       popper
     });
-    expect(vm.appended).to.empty;
+    expect(vm.appended).to.be.undefined;
     vm.createPopper();
     expect(vm.popperJS._popper.querySelector('[x-arrow][_v-110]')).to.exist;
   });

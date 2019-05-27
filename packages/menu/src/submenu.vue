@@ -1,8 +1,8 @@
 <script>
-  import ElCollapseTransition from 'element-ui-qz/src/transitions/collapse-transition';
+  import ElCollapseTransition from 'element-ui/src/transitions/collapse-transition';
   import menuMixin from './menu-mixin';
-  import Emitter from 'element-ui-qz/src/mixins/emitter';
-  import Popper from 'element-ui-qz/src/utils/vue-popper';
+  import Emitter from 'element-ui/src/mixins/emitter';
+  import Popper from 'element-ui/src/utils/vue-popper';
 
   const poperMixins = {
     props: {
@@ -178,7 +178,11 @@
         }
         this.dispatch('ElMenu', 'submenu-click', this);
       },
-      handleMouseenter() {
+      handleMouseenter(event, showTimeout = this.showTimeout) {
+
+        if (!('ActiveXObject' in window) && event.type === 'focus' && !event.relatedTarget) {
+          return;
+        }
         const { rootMenu, disabled } = this;
         if (
           (rootMenu.menuTrigger === 'click' && rootMenu.mode === 'horizontal') ||
@@ -191,7 +195,7 @@
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           this.rootMenu.openMenu(this.index, this.indexPath);
-        }, this.showTimeout);
+        }, showTimeout);
       },
       handleMouseleave() {
         const {rootMenu} = this;
@@ -271,9 +275,9 @@
             ref="menu"
             v-show={opened}
             class={[`el-menu--${mode}`, popperClass]}
-            on-mouseenter={this.handleMouseenter}
+            on-mouseenter={($event) => this.handleMouseenter($event, 100)}
             on-mouseleave={this.handleMouseleave}
-            on-focus={this.handleMouseenter}>
+            on-focus={($event) => this.handleMouseenter($event, 100)}>
             <ul
               role="menu"
               class={['el-menu el-menu--popup', `el-menu--popup-${currentPlacement}`]}

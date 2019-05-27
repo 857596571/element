@@ -1,4 +1,5 @@
 <template>
+  <!-- <ul class="el-select-group__wrap" v-show="visible"> -->
   <ul v-if="!fold" class="el-select-group__wrap" v-show="visible">
     <li class="el-select-group__title">{{ label }}</li>
     <li>
@@ -18,17 +19,18 @@
       </ul>
     </li>
   </ul>
-
 </template>
 
 <script type="text/babel">
-  import Emitter from 'element-ui-qz/src/mixins/emitter';
+  import Emitter from 'element-ui/src/mixins/emitter';
+
   export default {
     mixins: [Emitter],
 
     name: 'ElOptionGroup',
 
     componentName: 'ElOptionGroup',
+
     props: {
       label: String,
       disabled: {
@@ -83,4 +85,3 @@
     }
   };
 </script>
-

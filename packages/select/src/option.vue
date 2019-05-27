@@ -16,8 +16,8 @@
 </template>
 
 <script type="text/babel">
-  import Emitter from 'element-ui-qz/src/mixins/emitter';
-  import { getValueByPath, escapeRegexpString, searchMatch } from 'element-ui-qz/src/utils/util';
+  import Emitter from 'element-ui/src/mixins/emitter';
+  import { getValueByPath, escapeRegexpString, searchMatch } from 'element-ui/src/utils/util';
 
   export default {
     mixins: [Emitter],
@@ -109,10 +109,10 @@
 
       contains(arr = [], target) {
         if (!this.isObject) {
-          return arr.indexOf(target) > -1;
+          return arr && arr.indexOf(target) > -1;
         } else {
           const valueKey = this.select.valueKey;
-          return arr.some(item => {
+          return arr && arr.some(item => {
             return getValueByPath(item, valueKey) === getValueByPath(target, valueKey);
           });
         }

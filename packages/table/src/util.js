@@ -1,4 +1,4 @@
-import { getValueByPath } from 'element-ui-qz/src/utils/util';
+import { getValueByPath } from 'element-ui/src/utils/util';
 
 export const getCell = function(event) {
   let cell = event.target;
@@ -81,6 +81,18 @@ export const getColumnById = function(table, columnId) {
       column = item;
     }
   });
+  return column;
+};
+
+export const getColumnByKey = function(table, columnKey) {
+  let column = null;
+  for (let i = 0; i < table.columns.length; i++) {
+    const item = table.columns[i];
+    if (item.columnKey === columnKey) {
+      column = item;
+      break;
+    }
+  }
   return column;
 };
 

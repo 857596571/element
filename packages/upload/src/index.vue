@@ -1,8 +1,8 @@
 <script>
 import UploadList from './upload-list';
 import Upload from './upload';
-import ElProgress from 'element-ui-qz/packages/progress';
-import Migrating from 'element-ui-qz/src/mixins/migrating';
+import ElProgress from 'element-ui/packages/progress';
+import Migrating from 'element-ui/src/mixins/migrating';
 
 function noop() {}
 
@@ -122,6 +122,20 @@ export default {
   },
 
   watch: {
+    listType(type) {
+      if (type === 'picture-card' || type === 'picture') {
+        this.uploadFiles = this.uploadFiles.map(file => {
+          if (!file.url && file.raw) {
+            try {
+              file.url = URL.createObjectURL(file.raw);
+            } catch (err) {
+              console.error('[Element Error][Upload]', err);
+            }
+          }
+          return file;
+        });
+      }
+    },
     fileList: {
       immediate: true,
       handler(fileList) {

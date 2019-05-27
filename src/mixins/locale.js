@@ -1,4 +1,4 @@
-import { t } from 'element-ui-qz/src/locale';
+import { t } from 'element-ui/src/locale';
 
 export default {
   methods: {

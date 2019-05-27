@@ -1,20 +1,12 @@
 import Vue from 'vue';
-import merge from 'element-ui-qz/src/utils/merge';
-import PopupManager from 'element-ui-qz/src/utils/popup/popup-manager';
+import merge from 'element-ui/src/utils/merge';
+import PopupManager from 'element-ui/src/utils/popup/popup-manager';
 import getScrollBarWidth from '../scrollbar-width';
 import { getStyle, addClass, removeClass, hasClass } from '../dom';
 
 let idSeed = 1;
 
 let scrollBarWidth;
-
-const getDOM = function(dom) {
-  if (dom.nodeType === 3) {
-    dom = dom.nextElementSibling || dom.nextSibling;
-    getDOM(dom);
-  }
-  return dom;
-};
 
 export default {
   props: {
@@ -124,7 +116,7 @@ export default {
 
       this._opening = true;
 
-      const dom = getDOM(this.$el);
+      const dom = this.$el;
 
       const modal = props.modal;
 

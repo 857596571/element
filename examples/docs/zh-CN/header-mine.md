@@ -1,18 +1,3 @@
-<script>
-  export default {
-    
-    data() {
-      return {
-        btnCodeSetSkin: 'BTN_310682130088',
-        JID: localStorage.getItem('__JID__'),
-        setSkinUrl: 'http://192.168.2.225/ywpz-prj/gzyq/runGzyq',
-        setPasswordUrl: 'http://192.168.2.225/tu-prj/cu/update/loginpwdbyToken',
-        loginOutUrl: 'http://192.168.2.225/tu-prj/userLogOut'
-      }
-    }
-  }
-</script>
-
 ## Header-mine 公共头部
 
 用于公共头部
@@ -22,24 +7,22 @@
 :::demo Header-mine 组件。
 ```html
 <template>
-  <el-header-mine
-    :data="propData"
-  >
-  </el-header-mine>
+  <el-header-mine :data="data"></el-header-mine>
 </template>
 
 <script>
   export default {
     data() {
       return {
-        btnCodeSetSkin: 'BTN_310682130088',
-        JID: localStorage.getItem('__JID__'),
-        setSkinUrl: 'http://192.168.2.225/ywpz-prj/gzyq/runGzyq',
-        setPasswordUrl: 'http://192.168.2.225/tu-prj/cu/update/loginpwdbyToken',
-        loginOutUrl: 'http://192.168.2.225/tu-prj/userLogOut'
+        data: {
+            btnCodeSetSkin: 'BTN_310682130088',
+            JID: localStorage.getItem('__JID__'),
+            setSkinUrl: 'http://192.168.2.225/ywpz-prj/gzyq/runGzyq',
+            setPasswordUrl: 'http://192.168.2.225/tu-prj/cu/update/loginpwdbyToken',
+            loginOutUrl: 'http://192.168.2.225/tu-prj/userLogOut'
+        }
       };
-    },
+    }
   };
 </script>
-
 ```

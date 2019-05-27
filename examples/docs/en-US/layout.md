@@ -1,34 +1,3 @@
-<style>
-  .demo-layout {
-    .el-row {
-      margin-bottom: 20px;
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-    .el-col {
-      border-radius: 4px;
-    }
-    .bg-purple-dark {
-      background: #99a9bf;
-    }
-    .bg-purple {
-      background: #d3dce6;
-    }
-    .bg-purple-light {
-      background: #e5e9f2;
-    }
-    .grid-content {
-      border-radius: 4px;
-      min-height: 36px;
-    }
-    .row-bg {
-      padding: 10px 0;
-      background-color: #f9fafc;
-    }
-  }
-</style>
-
 ## Layout
 
 Quickly and easily create layouts with the basic 24-column.
@@ -346,7 +315,7 @@ Taking example by Bootstrap's responsive design, five breakpoints are preset: xs
 Additionally, Element provides a series of classes for hiding elements under certain conditions. These classes can be added to any DOM elements or custom components. You need to import the following CSS file to use these classes:
 
 ```js
-import 'element-ui-qz/lib/theme-chalk/display.css';
+import 'element-ui/lib/theme-chalk/display.css';
 ```
 
 The classes are:

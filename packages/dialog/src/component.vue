@@ -5,6 +5,9 @@
     @after-leave="afterLeave">
     <div class="el-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
       <div
+        role="dialog"
+        aria-modal="true"
+        :aria-label="title || 'dialog'"
         class="el-dialog"
         :class="[{ 'is-fullscreen': fullscreen, 'el-dialog--center': center }, customClass]"
         ref="dialog"
@@ -32,9 +35,9 @@
 </template>
 
 <script>
-  import Popup from 'element-ui-qz/src/utils/popup';
-  import Migrating from 'element-ui-qz/src/mixins/migrating';
-  import emitter from 'element-ui-qz/src/mixins/emitter';
+  import Popup from 'element-ui/src/utils/popup';
+  import Migrating from 'element-ui/src/mixins/migrating';
+  import emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElDialog',

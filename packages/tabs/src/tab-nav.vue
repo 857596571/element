@@ -1,6 +1,6 @@
 <script>
   import TabBar from './tab-bar';
-  import { addResizeListener, removeResizeListener } from 'element-ui-qz/src/utils/resize-event';
+  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
 
   function noop() {}
   const firstUpperCase = str => {
@@ -262,6 +262,7 @@
               'is-focus': this.isFocus
             }}
             id={`tab-${tabName}`}
+            key={`tab-${tabName}`}
             aria-controls={`pane-${tabName}`}
             role="tab"
             aria-selected={ pane.active }
@@ -302,6 +303,9 @@
       document.addEventListener('visibilitychange', this.visibilityChangeHandler);
       window.addEventListener('blur', this.windowBlurHandler);
       window.addEventListener('focus', this.windowFocusHandler);
+      setTimeout(() => {
+        this.scrollToActiveTab();
+      }, 0);
     },
 
     beforeDestroy() {

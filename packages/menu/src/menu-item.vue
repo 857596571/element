@@ -30,8 +30,8 @@
 </template>
 <script>
   import Menu from './menu-mixin';
-  import ElTooltip from 'element-ui-qz/packages/tooltip';
-  import Emitter from 'element-ui-qz/src/mixins/emitter';
+  import ElTooltip from 'element-ui/packages/tooltip';
+  import Emitter from 'element-ui/src/mixins/emitter';
 
   export default {
     name: 'ElMenuItem',
@@ -44,8 +44,8 @@
 
     props: {
       index: {
-        type: String,
-        required: true
+        default: null,
+        validator: val => typeof val === 'string' || val === null
       },
       route: [String, Object],
       disabled: Boolean

@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Loading from './loading.vue';
-import { addClass, removeClass, getStyle } from 'element-ui-qz/src/utils/dom';
-import { PopupManager } from 'element-ui-qz/src/utils/popup';
-import afterLeave from 'element-ui-qz/src/utils/after-leave';
+import { addClass, removeClass, getStyle } from 'element-ui/src/utils/dom';
+import { PopupManager } from 'element-ui/src/utils/popup';
+import afterLeave from 'element-ui/src/utils/after-leave';
 const Mask = Vue.extend(Loading);
 
 const loadingDirective = {};
@@ -45,6 +45,7 @@ loadingDirective.install = Vue => {
       });
     } else {
       afterLeave(el.instance, _ => {
+        if (!el.instance.hiding) return;
         el.domVisible = false;
         const target = binding.modifiers.fullscreen || binding.modifiers.body
           ? document.body
@@ -80,6 +81,9 @@ loadingDirective.install = Vue => {
         }
       });
       el.domInserted = true;
+    } else if (el.domVisible && el.instance.hiding === true) {
+      el.instance.visible = true;
+      el.instance.hiding = false;
     }
   };
 
@@ -121,6 +125,7 @@ loadingDirective.install = Vue => {
         el.mask.parentNode.removeChild(el.mask);
         toggleLoading(el, { value: false, modifiers: binding.modifiers });
       }
+      el.instance && el.instance.$destroy();
     }
   });
 };

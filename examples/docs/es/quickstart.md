@@ -4,7 +4,7 @@ Esta sección te guía en el proceso de usar Element con webpack en un proyecto.
 
 ### Use vue-cli@3
 
-We provide an [Element plugin](https://github.com/ElementUI/vue-cli-plugin-element) for vue-cli@3, which you can use to quickly build an Element-based project.
+Proporcionamos un [plugin de Element](https://github.com/ElementUI/vue-cli-plugin-element) para vue-cli@3, que puede utilizar para construir rápidamente un proyecto basado en Element.
 
 ### Usa la plantilla de Kit de inicio
 
@@ -22,8 +22,8 @@ In main.js:
 
 ```javascript
 import Vue from 'vue';
-import ElementUI from 'element-ui-qz';
-import 'element-ui-qz/lib/theme-chalk/index.css';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 import App from './App.vue';
 
 Vue.use(ElementUI);
@@ -55,7 +55,7 @@ Luego edite .babelrc:
     [
       "component",
       {
-        "libraryName": "element-ui-qz",
+        "libraryName": "element-ui",
         "styleLibraryName": "theme-chalk"
       }
     ]
@@ -67,7 +67,7 @@ Luego, si necesita Button y Select, edite main.js:
 
 ```javascript
 import Vue from 'vue';
-import { Button, Select } from 'element-ui-qz';
+import { Button, Select } from 'element-ui';
 import App from './App.vue';
 
 Vue.component(Button.name, Button);
@@ -155,7 +155,7 @@ import {
   MessageBox,
   Message,
   Notification
-} from 'element-ui-qz';
+} from 'element-ui';
 
 Vue.use(Pagination);
 Vue.use(Dialog);
@@ -239,7 +239,7 @@ Importando Element completamente：
 
 ```js
 import Vue from 'vue';
-import Element from 'element-ui-qz';
+import Element from 'element-ui';
 Vue.use(Element, { size: 'small', zIndex: 3000 });
 ```
 
@@ -247,7 +247,7 @@ Importando Element parcialmente：
 
 ```js
 import Vue from 'vue';
-import { Button } from 'element-ui-qz';
+import { Button } from 'element-ui';
 
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 };
 Vue.use(Button);

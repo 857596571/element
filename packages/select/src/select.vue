@@ -121,35 +121,35 @@
           </el-option>
           <slot></slot>
         </el-scrollbar>
-        <p
-          class="el-select-dropdown__empty"
-          v-if="emptyText &&
-            (!allowCreate || loading || (allowCreate && options.length === 0 ))">
-          {{ emptyText }}
-        </p>
+        <template v-if="emptyText && (!allowCreate || loading || (allowCreate && options.length === 0 ))">
+          <slot name="empty" v-if="$slots.empty"></slot>
+          <p class="el-select-dropdown__empty" v-else>
+            {{ emptyText }}
+          </p>
+        </template>
       </el-select-menu>
     </transition>
   </div>
 </template>
 
 <script type="text/babel">
-  import Emitter from 'element-ui-qz/src/mixins/emitter';
-  import Focus from 'element-ui-qz/src/mixins/focus';
-  import Locale from 'element-ui-qz/src/mixins/locale';
-  import ElInput from 'element-ui-qz/packages/input';
+  import Emitter from 'element-ui/src/mixins/emitter';
+  import Focus from 'element-ui/src/mixins/focus';
+  import Locale from 'element-ui/src/mixins/locale';
+  import ElInput from 'element-ui/packages/input';
   import ElSelectMenu from './select-dropdown.vue';
   import ElOption from './option.vue';
-  import ElTag from 'element-ui-qz/packages/tag';
-  import ElScrollbar from 'element-ui-qz/packages/scrollbar';
+  import ElTag from 'element-ui/packages/tag';
+  import ElScrollbar from 'element-ui/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
-  import Clickoutside from 'element-ui-qz/src/utils/clickoutside';
-  import { addResizeListener, removeResizeListener } from 'element-ui-qz/src/utils/resize-event';
-  import { t } from 'element-ui-qz/src/locale';
-  import scrollIntoView from 'element-ui-qz/src/utils/scroll-into-view';
-  import { getValueByPath } from 'element-ui-qz/src/utils/util';
-  import { valueEquals, isIE, isEdge } from 'element-ui-qz/src/utils/util';
+  import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
+  import { t } from 'element-ui/src/locale';
+  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
+  import { getValueByPath } from 'element-ui/src/utils/util';
+  import { valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
   import NavigationMixin from './navigation-mixin';
-  import { isKorean } from 'element-ui-qz/src/utils/shared';
+  import { isKorean } from 'element-ui/src/utils/shared';
 
   export default {
     mixins: [Emitter, Locale, Focus('reference'), NavigationMixin],
@@ -185,7 +185,7 @@
 
       showClose() {
         let hasValue = this.multiple
-          ? this.value.length > 0
+          ? Array.isArray(this.value) && this.value.length > 0
           : this.value !== undefined && this.value !== null && this.value !== '';
         let criteria = this.clearable &&
           !this.selectDisabled &&
@@ -346,7 +346,7 @@
       value(val, oldVal) {
         if (this.multiple) {
           this.resetInputHeight();
-          if (val.length > 0 || (this.$refs.input && this.query !== '')) {
+          if ((val && val.length > 0) || (this.$refs.input && this.query !== '')) {
             this.currentPlaceholder = '';
           } else {
             this.currentPlaceholder = this.cachedPlaceHolder;
@@ -375,6 +375,7 @@
           this.previousQuery = null;
           this.selectedLabel = '';
           this.inputLength = 20;
+          this.menuVisibleOnFocus = false;
           this.resetHoverIndex();
           this.$nextTick(() => {
             if (this.$refs.input &&
@@ -393,6 +394,10 @@
               }
               if (this.filterable) this.query = this.selectedLabel;
             }
+
+            if (this.filterable) {
+              this.currentPlaceholder = this.cachedPlaceHolder;
+            }
           }
         } else {
           this.broadcast('ElSelectDropdown', 'updatePopper');
@@ -406,7 +411,11 @@
                 this.broadcast('ElOption', 'queryChange', '');
                 this.broadcast('ElOptionGroup', 'queryChange');
               }
-              this.broadcast('ElInput', 'inputSelect');
+
+              if (this.selectedLabel) {
+                this.currentPlaceholder = this.selectedLabel;
+                this.selectedLabel = '';
+              }
             }
           }
         }
@@ -662,7 +671,7 @@
 
       handleOptionSelect(option, byClick) {
         if (this.multiple) {
-          const value = this.value.slice();
+          const value = (this.value || []).slice();
           const optionIndex = this.getValueIndex(value, option.value);
           if (optionIndex > -1) {
             value.splice(optionIndex, 1);
@@ -741,7 +750,7 @@
 
       deleteSelected(event) {
         event.stopPropagation();
-        const value = this.multiple ? [] : '';
+        const value = this.multiple ? [] : null;
         this.$emit('input', value);
         this.emitChange(value);
         this.visible = false;

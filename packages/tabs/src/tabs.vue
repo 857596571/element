@@ -59,13 +59,14 @@
       handleTabshow() {
         this.$emit('tab-show', null);
       },
-      calcPaneInstances() {
+      calcPaneInstances(isForceUpdate = false) {
         if (this.$slots.default) {
           const paneSlots = this.$slots.default.filter(vnode => vnode.tag &&
             vnode.componentOptions && vnode.componentOptions.Ctor.options.name === 'ElTabPane');
           // update indeed
           const panes = paneSlots.map(({ componentInstance }) => componentInstance);
-          if (!(panes.length === this.panes.length && panes.every((pane, index) => pane === this.panes[index]))) {
+          const panesChanged = !(panes.length === this.panes.length && panes.every((pane, index) => pane === this.panes[index]));
+          if (isForceUpdate || panesChanged) {
             this.panes = panes;
           }
         } else if (this.panes.length !== 0) {
@@ -95,11 +96,14 @@
         if (this.currentName !== value && this.beforeLeave) {
           const before = this.beforeLeave(value, this.currentName);
           if (before && before.then) {
-            before.then(() => {
-              changeCurrentName();
-
-              this.$refs.nav && this.$refs.nav.removeFocus();
-            });
+            before
+              .then(() => {
+                changeCurrentName();
+                this.$refs.nav && this.$refs.nav.removeFocus();
+              }, () => {
+                // https://github.com/ElemeFE/element/pull/14816
+                // ignore promise rejection in `before-leave` hook
+              });
           } else if (before !== false) {
             changeCurrentName();
           }
@@ -124,12 +128,13 @@
         icontabs,
         handleTabshow
       } = this;
-
+      
       const showButton = icontabs ? (
         <span class="el-tabs__show" on-mouseover={ handleTabshow } tabindex="-1" style="float:right;height:18px;line-height:18px;">
           <i class="el-icon-menu"></i>
         </span>
       ) : null;
+
       const newButton = editable || addable
         ? (
           <span
@@ -184,6 +189,8 @@
       if (!this.currentName) {
         this.setCurrentName('0');
       }
+
+      this.$on('tab-nav-update', this.calcPaneInstances.bind(null, true));
     },
 
     mounted() {
@@ -195,8 +202,9 @@
     }
   };
 </script>
+
 <style lang="scss">
-  .el-tabs__show:hover{
+  .el-tabs__show:hover {
     cursor: pointer;
   }
 </style>

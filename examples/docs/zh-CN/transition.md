@@ -146,35 +146,10 @@ Element 内应用在部分组件的过渡动画，你也可以直接使用。在
 
 ```js
 // fade/zoom 等
-import 'element-ui-qz/lib/theme-chalk/base.css';
+import 'element-ui/lib/theme-chalk/base.css';
 // collapse 展开折叠
-import CollapseTransition from 'element-ui-qz/lib/transitions/collapse-transition';
+import CollapseTransition from 'element-ui/lib/transitions/collapse-transition';
 import Vue from 'vue'
 
 Vue.component(CollapseTransition.name, CollapseTransition)
 ```
-
-<style>
-  .transition-box {
-    margin-bottom: 10px;
-    width: 200px;
-    height: 100px;
-    border-radius: 4px;
-    background-color: #409EFF;
-    text-align: center;
-    color: #fff;
-    padding: 40px 20px;
-    margin-right: 20px;
-    box-sizing: border-box;
-  }
-</style>
-
-<script>
-  module.exports = {
-    data: () => ({
-      show: true,
-      show2: true,
-      show3: true
-    })
-  }
-</script>

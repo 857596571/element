@@ -110,15 +110,15 @@
 </template>
 
 <script>
-import ThemePicker from 'element-ui-qz/examples/components/theme-picker.vue';
-import ElDropdown from 'element-ui-qz/packages/dropdown';
-import ElDropdownItem from 'element-ui-qz/packages/dropdown-item';
-import ElDropdownMenu from 'element-ui-qz/packages/dropdown-menu';
-import ElForm from 'element-ui-qz/packages/form';
-import ElInput from 'element-ui-qz/packages/input';
-import ElFormItem from 'element-ui-qz/packages/form-item';
-import ElButton from 'element-ui-qz/packages/button';
-import ElDialog from 'element-ui-qz/packages/dialog';
+import ThemePicker from 'element-ui/examples/components/theme-picker.vue';
+import ElDropdown from 'element-ui/packages/dropdown';
+import ElDropdownItem from 'element-ui/packages/dropdown-item';
+import ElDropdownMenu from 'element-ui/packages/dropdown-menu';
+import ElForm from 'element-ui/packages/form';
+import ElInput from 'element-ui/packages/input';
+import ElFormItem from 'element-ui/packages/form-item';
+import ElButton from 'element-ui/packages/button';
+import ElDialog from 'element-ui/packages/dialog';
 
 import keyboard from '../keyBoard/keyboard';
 import '../keyBoard/keyboard.css';
