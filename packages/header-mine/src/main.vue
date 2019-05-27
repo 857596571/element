@@ -120,9 +120,10 @@ import ElFormItem from 'element-ui/packages/form-item';
 import ElButton from 'element-ui/packages/button';
 import ElDialog from 'element-ui/packages/dialog';
 
-import keyboard from '../keyBoard/keyboard';
-import '../keyBoard/keyboard.css';
-const _keyboard = keyboard();
+// import keyboard from '../keyBoard/keyboard';
+// import '../keyBoard/keyboard.css';
+// const _keyboard = keyboard();
+const _keyboard = () => {};
 
 export default {
   name: 'ElHeaderMine',
@@ -154,7 +155,7 @@ export default {
   data: function() {
     const skin = localStorage.getItem('skin');
     const userInfo = localStorage.getItem('userInfo');
-    const title = JSON.parse(localStorage.getItem('title')).title;
+    const title = localStorage.getItem('title') ? JSON.parse(localStorage.getItem('title')).title : '';
     return {
       getTitle: title,
       headerBg: skin && skin.includes('green') ? '#0A3464' : '#4C85FF',

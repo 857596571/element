@@ -128,7 +128,6 @@
         icontabs,
         handleTabshow
       } = this;
-      
       const showButton = icontabs ? (
         <span class="el-tabs__show" on-mouseover={ handleTabshow } tabindex="-1" style="float:right;height:18px;line-height:18px;">
           <i class="el-icon-menu"></i>
