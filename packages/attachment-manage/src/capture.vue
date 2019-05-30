@@ -129,11 +129,11 @@
 </template>
 
 <script>
-  import ElButton from 'element-ui/packages/button';
-  import ElDialog from 'element-ui/packages/dialog';
-  import ElForm from 'element-ui/packages/form';
-  import ElFormItem from 'element-ui/packages/form-item';
-  import ElProgress from 'element-ui/packages/progress';
+  import ElButton from 'element-ui-qz/packages/button';
+  import ElDialog from 'element-ui-qz/packages/dialog';
+  import ElForm from 'element-ui-qz/packages/form';
+  import ElFormItem from 'element-ui-qz/packages/form-item';
+  import ElProgress from 'element-ui-qz/packages/progress';
 
   export default {
     name: 'capture',

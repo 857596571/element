@@ -55,7 +55,7 @@
   require('echarts/lib/component/dataZoom');
   require('echarts/lib/component/markPoint');
 
-  import ElDatePicker from 'element-ui/packages/date-picker';
+  import ElDatePicker from 'element-ui-qz/packages/date-picker';
 
   export default {
     name: 'ElQualityControlChart',
