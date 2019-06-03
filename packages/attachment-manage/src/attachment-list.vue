@@ -82,6 +82,8 @@
                     <img v-if="compute_file_type(scope.row.file_name) === 'xlsx' || 
                                 compute_file_type(scope.row.file_name) === 'xls'" src="../images/xsl-icon.png"
                          :title="scope.row.file_name"/>
+
+                    <i style="font-size: 28px;margin: 0 8px;" v-if="'raq,rpg,rpx,prg,dfx,olap'.includes(compute_file_type(scope.row.file_name))" class="el-icon-tickets"></i>
                     {{ get_file_name(scope.row.file_name) }}
                 </template>
             </el-table-column>
