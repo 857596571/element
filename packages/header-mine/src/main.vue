@@ -243,8 +243,8 @@ export default {
       });
     },
     toHome() {
-      // location.href = '/#/home';
-      location.href = location.origin + '/#/home';
+      const index = localStorage.getItem('index') || location.origin + '/#/home';
+      location.href = index;
     },
     keyboardBtn() {
       this.keyboardOpen = !this.keyboardOpen;
