@@ -82,6 +82,8 @@
                     <img v-if="compute_file_type(scope.row.file_name) === 'xlsx' || 
                                 compute_file_type(scope.row.file_name) === 'xls'" src="../images/xsl-icon.png"
                          :title="scope.row.file_name"/>
+
+                    <i style="font-size: 28px;margin: 0 8px;" v-if="'raq,rpg,rpx,prg,dfx,olap'.includes(compute_file_type(scope.row.file_name))" class="el-icon-tickets"></i>
                     {{ get_file_name(scope.row.file_name) }}
                 </template>
             </el-table-column>
@@ -250,6 +252,10 @@
                             </el-select>
                         </td>
                     </tr>
+                    <tr>
+                        <td>文件名</td>
+                        <td><el-input v-model="update_file_file_name"></el-input></td>
+                    </tr>
                     <!-- <tr>
                          <td>加密级别</td>
                          <td>
@@ -302,6 +308,7 @@
         file_selected: false,
         update_dialog_visible: false,
         update_file_cate_value: '',
+        update_file_file_name: '',
         update_business_no: '',
         update_encrypt_value: '',
         current_edit_data: null,
@@ -517,7 +524,7 @@
           busin_co: this.update_business_no,
           encr_lev: this.update_encrypt_value,
           file_prn: original_rowData.file_prn,
-          file_name: original_rowData.file_name,
+          file_name: this.update_file_file_name,
           file_size: original_rowData.file_size,
           file_uri: original_rowData.file_uri,
           remark: original_rowData.remark,
@@ -546,6 +553,7 @@
         this.update_business_no = dataRow.busin_co;
         this.update_file_cate_value = dataRow.bus_type;
         this.update_encrypt_value = dataRow.encr_lev;
+        this.update_file_file_name = dataRow.file_name;
         this.update_dialog_visible = true;
       },
       handleClose(done) {

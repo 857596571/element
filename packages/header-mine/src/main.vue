@@ -154,7 +154,7 @@ export default {
   data: function() {
     const skin = localStorage.getItem('skin');
     const userInfo = localStorage.getItem('userInfo');
-    const title = JSON.parse(localStorage.getItem('title')).title;
+    const title = localStorage.getItem('title') ? JSON.parse(localStorage.getItem('title')).title : '';
     return {
       getTitle: title,
       headerBg: skin && skin.includes('green') ? '#0A3464' : '#4C85FF',
@@ -243,8 +243,8 @@ export default {
       });
     },
     toHome() {
-      // location.href = '/#/home';
-      location.href = location.origin + '/#/home';
+      const index = localStorage.getItem('index') || location.origin + '/#/home';
+      location.href = index;
     },
     keyboardBtn() {
       this.keyboardOpen = !this.keyboardOpen;
