@@ -95,7 +95,7 @@ export default {
       type: Object,
       default: () => {
         return {
-          JID: '4470E1F1417E1E24513a113f-cfca-4e2f-a674-e12423eec51f',
+          JID: localStorage.getItem('__JID__'),
           Url: 'http://192.168.2.225:83/tu-prj/getFeMenuResToken',
           reqType: 'post'
         };
