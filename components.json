@@ -72,6 +72,7 @@
   "flow-record": "./packages/flow-record/index.js",
   "quality-control-chart": "./packages/quality-control-chart/index.js",
   "header-mine": "./packages/header-mine/index.js",
-  "menue-mine": "./packages/menue-mine/index.js"
-
+  "header-mine-new": "./packages/header-mine-new/index.js",
+  "menue-mine": "./packages/menue-mine/index.js",
+  "menue-mine-new": "./packages/menue-mine-new/index.js"
 }

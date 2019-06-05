@@ -256,8 +256,16 @@
                             "title": "headerMine 头部"
                         },
                         {
+                            "path": "/header-mine-new",
+                            "title": "headerMine 头部(新)"
+                        },
+                        {
                             "path": "/menue-mine",
                             "title": "menueMine 系统左侧菜单"
+                        },
+                        {
+                            "path": "/menue-mine-new",
+                            "title": "menueMineMew 系统左侧菜单(新)"
                         }
                     ]
                 }

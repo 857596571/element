@@ -5,7 +5,8 @@
     data() {
       return {
         icons: iconList,
-        icons2: ['home', 'skin', 'ohm', 'user', 'menu']
+        icons2: ['home', 'skin', 'ohm', 'user', 'menu','iconshouye1','iconoumu','iconxiaoxi','icongerendangan',
+				'iconxiugaimima','icontuichudenglu','iconxiugaizhuti','iconzhaotonglei','iconbangzhu','iconshezhi','iconsousuo']
       };
     }
   }

@@ -251,6 +251,9 @@
     Popper.prototype.onCreate = function(callback) {
         // multiple
         var popper = document.querySelectorAll('.el-popper');
+        if(typeof popper !=  Array){
+           return
+        }
         var showNum = 0
         popper && popper.forEach(function(el) {
           if (el.getAttribute('x-placement')) {

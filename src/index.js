@@ -73,7 +73,9 @@ import AttachmentManage from '../packages/attachment-manage/index.js';
 import FlowRecord from '../packages/flow-record/index.js';
 import QualityControlChart from '../packages/quality-control-chart/index.js';
 import HeaderMine from '../packages/header-mine/index.js';
+import HeaderMineNew from '../packages/header-mine-new/index.js';
 import MenueMine from '../packages/menue-mine/index.js';
+import MenueMineNew from '../packages/menue-mine-new/index.js';
 import locale from 'element-ui-qz/src/locale';
 import CollapseTransition from 'element-ui-qz/src/transitions/collapse-transition';
 
@@ -147,7 +149,9 @@ const components = [
   FlowRecord,
   QualityControlChart,
   HeaderMine,
+  HeaderMineNew,
   MenueMine,
+  MenueMineNew,
   CollapseTransition
 ];
 
@@ -260,7 +264,9 @@ module.exports = {
   FlowRecord,
   QualityControlChart,
   HeaderMine,
-  MenueMine
+  HeaderMineNew,
+  MenueMine,
+  MenueMineNew
 };
 
 module.exports.default = module.exports;
