@@ -165,6 +165,7 @@
                     <img v-if="compute_file_type(item.file_name) === 'xls' ||
                                 compute_file_type(item.file_name) === 'xlsx'" src="../images/xsl-file-icon.png"/>
                     <!--<el-checkbox v-if="item.type === 'file'" v-model="file_selected"></el-checkbox>-->
+                    <i style="font-size: 112px;margin: 6px 8px;" v-if="'raq,rpg,rpx,prg,dfx,olap'.includes(compute_file_type(item.file_name))" class="el-icon-tickets"></i>
                     <input v-bind:id="item.id" type="checkbox" name="file_checkbox_list"
                            v-bind:value="item.id" @click="file_selected_handle(item.id)"/>
                     <div class="file-name">{{get_file_name(item.file_name)}}</div>
