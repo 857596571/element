@@ -111,7 +111,7 @@
 
         <el-dialog
                 title="附件上传"
-                width="538px"
+                width="544px"
                 :visible.sync="upload_dialog_visible"
                 :before-close="handleClose"
                 :modal="false">
